@@ -116,8 +116,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 style="text-align: center;" class="title display-7">
-جلسه ۸: API — از مفاهیم بنیادین تا طراحی و پیاده‌سازی پیشرفته
+<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 style="text-align: center; font-size: 2.4rem;" class="title display-7">
+جلسه ۸: API — از مبانی نظری تا معماری، طراحی، امنیت و پیاده‌سازی حرفه‌ای
 </h1></header>
 
 
@@ -125,302 +125,218 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div style="text-align: center; margin-top: 2rem;">
 
-<h2 class="anchored">
-مبانی HTTP، معماری REST، روش‌های استاندارد مستندسازی، امنیت و ساخت یک API مدرن با پایتون (FastAPI)
+<h2 style="font-size: 1.6rem; margin-top: 1rem;" class="anchored">
+تحلیل عمیق پروتکل HTTP، اصول REST، استانداردهای صنعتی، امنیت، قراردادهای داده و پیاده‌سازی مدرن با FastAPI
 </h2>
-<p style="color: var(--color-text-muted); font-size: 1.1rem;">
-تحلیل عمیق پروتکل‌های ارتباطی، ساختار Request/Response، معماری‌های مدرن API، الگوهای طراحی و پیاده‌سازی یک API مطابق استانداردهای صنعتی.
+<p style="color: var(--color-text-muted); font-size: 1.2rem; max-width: 900px; margin: 1rem auto; line-height: 1.9;">
+در این جلسه، API را از پایین‌ترین سطح — پروتکل HTTP — تا سطح معماری، طراحی، الگوهای مهندسی، امنیت و پیاده‌سازی عملی بررسی می‌کنیم. هدف، تبدیل دانشجو از «کاربر API» به «طراح API» است؛ یعنی فردی که قادر است APIهای پایدار، توسعه‌پذیر، امن و استاندارد سازمانی طراحی کند.
 </p>
 <hr style="width: 60%; margin: 2rem auto;">
 </div>
 <section class="section-card">
 <h3 class="anchored">
-بخش اول: بنیادهای API و نقش آن در سیستم‌های نرم‌افزاری
+بخش اول: API چیست و چرا مهم است؟ — تحلیل مفهومی، معماری و نقش آن در سیستم‌های مدرن
 </h3>
-<p style="color: var(--color-text-muted); font-size: 1.1rem;">
-درک دقیق مفهوم API و جایگاه آن در ارتباط میان سرویس‌ها، سیستم‌ها و معماری‌های مبتنی بر میکروسرویس.
+<p style="color: var(--color-text-muted); font-size: 1.15rem; line-height: 1.9;">
+API ستون فقرات دنیای نرم‌افزار مدرن است. اپلیکیشن‌ها، سرویس‌ها، سیستم‌های توزیع‌شده، موبایل، وب‌اپلیکیشن‌ها، IoT و حتی سیستم‌های هوش مصنوعی، هیچ‌کدام بدون API قابل اتصال و تعامل نیستند.
 </p>
 <h4 class="anchored">
-۱.۱. تعریف API و نقش آن
+۱.۱. تعریف پیشرفته API
 </h4>
-<dl>
-<dt>
-API چیست؟
-</dt>
-<dd>
 <p>
-API (Application Programming Interface) یک لایهٔ قراردادی است که نحوهٔ تعامل نرم‌افزارها با یکدیگر را تعریف می‌کند.<br>
-این تعریف شامل ساختار پیام‌ها، قوانین درخواست/پاسخ، مدل داده و سیاست‌های امنیتی است.
+API فقط «رابط برنامه‌نویسی» نیست؛ بلکه یک <strong>قرارداد ارتباطی (Communication Contract)</strong> است که موارد زیر را مشخص می‌کند:
 </p>
-</dd>
-<dt>
-ارتباط API با وب
-</dt>
-<dd>
-<p>
-در محیط وب، API عمدتاً با HTTP و فرمت‌های JSON یا XML پیاده‌سازی می‌شود. امروزه JSON استاندارد غالب است به‌دلیل خوانایی بالا و سازگاری با زبان‌های مختلف.
-</p>
-</dd>
-</dl>
+<ul>
+<li>
+چطور درخواست ارسال می‌شود
+</li>
+<li>
+ساختار دقیق پاسخ‌ها چیست
+</li>
+<li>
+چطور خطاها مدیریت می‌شوند
+</li>
+<li>
+چگونه امنیت، نسخه‌بندی و توسعه‌پذیری کنترل می‌شود
+</li>
+</ul>
 <h4 class="anchored">
-۱.۲. نقش HTTP در APIها
+۱.۲. APIها در معماری سیستم‌های مدرن
 </h4>
-<dl>
-<dt>
-پروتکل HTTP
-</dt>
-<dd>
 <p>
-HTTP نه فقط یک پروتکل انتقال داده، بلکه یک الگوی استاندارد ارتباطی میان سرویس‌ها است.<br>
-APIهای REST، GraphQL و حتی بسیاری از وب‌سوکت‌ها و گیت‌وی‌ها، مستقیماً بر پایهٔ HTTP طراحی می‌شوند.
+APIها قلب معماری‌های امروز هستند:
 </p>
+<ul>
+<li>
+Microservices — تمام سرویس‌ها با API به‌هم متصل‌اند
+</li>
+<li>
+Frontend/Backend — فرانت‌اند فقط با API با بک‌اند ارتباط دارد
+</li>
+<li>
+Mobile Apps — کاملاً API-Driven هستند
+</li>
+<li>
+Machine-to-Machine Communication
+</li>
+<li>
+Cloud Services و Serverless Functions
+</li>
+</ul>
 <p>
-ساختار کلی یک درخواست HTTP:
+در واقع API همان چیزی است که «اکوسیستم نرم‌افزاری» را ممکن کرده است.
 </p>
+</section>
+<section class="section-card">
+<h3 class="anchored">
+بخش دوم: پروتکل HTTP — زیربنای تمام APIهای RESTful
+</h3>
+<p style="color: var(--color-text-muted); font-size: 1.15rem; line-height: 1.9;">
+برای طراحی یک API حرفه‌ای، باید HTTP را نه فقط به‌عنوان یک پروتکل، بلکه به‌عنوان یک «زبان ارتباطی استاندارد» بفهمیم.
+</p>
+<h4 class="anchored">
+۲.۱. ساختار یک درخواست HTTP
+</h4>
 <pre><code>
-METHOD /path HTTP/1.1
+METHOD /resource HTTP/1.1
 Host: example.com
 Content-Type: application/json
+Authorization: Bearer TOKEN
 
-{ "key": "value" }
-    </code></pre>
-</dd>
-</dl>
+{ "field": "value" }
+</code></pre>
+<p>
+هر درخواست شامل سه بخش است:
+</p>
+<ul>
+<li>
+<strong>Request Line</strong> — متد + مسیر
+</li>
+<li>
+<strong>Headers</strong> — اطلاعات ارتباطی، امنیتی و متادیتا
+</li>
+<li>
+<strong>Body</strong> — دادهٔ اصلی (برای POST/PUT/PATCH)
+</li>
+</ul>
+<h4 class="anchored">
+۲.۲. پاسخ HTTP
+</h4>
+<pre><code>
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{ "status": "success", "data": ... }
+</code></pre>
 </section>
 <section class="section-card">
 <h3 class="anchored">
-بخش دوم: متدهای استاندارد HTTP و وضعیت‌های پاسخ
+بخش سوم: طراحی REST — اصول، الگوها و مسیرهای استاندارد
 </h3>
-<p style="color: var(--color-text-muted); font-size: 1.1rem;">
-متدهای HTTP رفتار API را تعریف و کدهای وضعیت نتیجهٔ عملیات را مشخص می‌کنند.
+<p style="color: var(--color-text-muted); font-size: 1.15rem; line-height: 1.9;">
+REST یک معماری ساده نیست؛ یک «فلسفهٔ طراحی» است که API را از سطح یک سرویس ساده به سطح یک استاندارد سازمانی ارتقا می‌دهد.
 </p>
 <h4 class="anchored">
-۲.۱. متدهای اصلی HTTP
+۳.۱. اصول بنیادین REST
 </h4>
-<dl>
-<dt>
-GET
-</dt>
-<dd>
-<p>
-دریافت داده بدون ایجاد تغییر در سرور. عملیات ایمن (Safe) و قابل کش شدن.
-</p>
-</dd>
-<dt>
-POST
-</dt>
-<dd>
-<p>
-ایجاد ریسورس جدید. عملیات غیرایمن و غیر Idempotent.
-</p>
-</dd>
-<dt>
-PUT
-</dt>
-<dd>
-<p>
-بازنویسی کامل یک ریسورس و Idempotent بودن آن.
-</p>
-</dd>
-<dt>
-PATCH
-</dt>
-<dd>
-<p>
-بروزرسانی جزئی یک ریسورس بدون بازنویسی کامل.
-</p>
-</dd>
-<dt>
-DELETE
-</dt>
-<dd>
-<p>
-حذف قطعی یک ریسورس از سرور.
-</p>
-</dd>
-</dl>
-<h4 class="anchored">
-۲.۲. دسته‌بندی کدهای وضعیت
-</h4>
-<dl>
-<dt>
-۲xx — موفقیت
-</dt>
-<dd>
-<p>
-نشان‌دهندهٔ انجام صحیح عملیات. 200 (OK)، 201 (Created).
-</p>
-</dd>
-<dt>
-۳xx — ریدایرکت
-</dt>
-<dd>
-<p>
-تغییر مسیر. مانند 301 یا 307.
-</p>
-</dd>
-<dt>
-۴xx — خطای سمت کاربر
-</dt>
-<dd>
-<p>
-درخواست اشتباه یا غیرمجاز. 400 (Bad Request)، 401، 403، 404.
-</p>
-</dd>
-<dt>
-۵xx — خطای سرور
-</dt>
-<dd>
-<p>
-مشکل داخلی سرور. 500، 503.
-</p>
-</dd>
-</dl>
-</section>
-<section class="section-card">
-<h3 class="anchored">
-بخش سوم: معماری REST و اصول طراحی
-</h3>
-<p style="color: var(--color-text-muted); font-size: 1.1rem;">
-بررسی اصول بنیادین REST، مدل‌سازی منابع، استانداردسازی مسیرها و بهترین‌تمرین‌های طراحی.
-</p>
-<h4 class="anchored">
-۳.۱. اصول REST
-</h4>
-<dl>
-<dt>
-۱. Stateless بودن
-</dt>
-<dd>
-هیچ وضعیت کاربر در سرور نگهداری نمی‌شود. هر درخواست کامل و مستقل است.
-</dd>
-<dt>
-۲. Resource-Oriented Design
-</dt>
-<dd>
-<p>
-هر چیز یک ریسورس است و باید با یک URI یکتا معرفی شود.
-</p>
-</dd>
-<dt>
-۳. استفاده از عملیات استاندارد HTTP
-</dt>
-<dd>
-<p>
-هر عملیات باید معنای منطقی RESTful داشته باشد.
-</p>
-</dd>
-<dt>
-۴. چندلایه بودن (Layered System)
-</dt>
-<dd>
-<p>
-کلاینت نباید حدس بزند پشت API چه سرویسی است.
-</p>
-</dd>
-<dt>
-۵. امکان Cache پذیری
-</dt>
-<dd>
-<p>
-پاسخ‌ها باید مشخص کنند قابل کش شدن هستند یا نه.
-</p>
-</dd>
-</dl>
+<ul>
+<li>
+<strong>Stateless</strong> — درخواست مستقل است
+</li>
+<li>
+<strong>Resource-Oriented</strong> — همه‌چیز یک ریسورس است
+</li>
+<li>
+<strong>Uniform Interface</strong> — ساختار ثابت برای همه
+</li>
+<li>
+<strong>Client/Server Separation</strong> — استقلال کامل دو طرف
+</li>
+<li>
+<strong>Cacheability</strong> — پاسخ‌ها قابل کش باشند
+</li>
+<li>
+<strong>Layered Architecture</strong> — چندلایه بودن سیستم
+</li>
+</ul>
 <h4 class="anchored">
 ۳.۲. ساختار مسیرهای صحیح
 </h4>
-<pre><code class="language-pseudocode">
-// مسیرهای درست
-GET   /users
-GET   /users/123
-POST  /users
-PUT   /users/123
+<pre><code>// مسیرهای درست (Resource-Oriented)
+GET   /users            → دریافت همهٔ کاربران
+GET   /users/123        → دریافت یک کاربر
+POST  /users            → ایجاد کاربر
+PUT   /users/123        → بروزرسانی کامل
+PATCH /users/123        → بروزرسانی جزئی
+DELETE /users/123       → حذف
 
-// مسیرهای نادرست — نقض اصول REST
+// مسیرهای نادرست — استفاده از فعل در URL (Anti-Pattern)
 GET /getAllUsers
 POST /createUser
 </code></pre>
 </section>
 <section class="section-card">
 <h3 class="anchored">
-بخش چهارم: امنیت API و روش‌های احراز هویت
+بخش چهارم: امنیت API — مدل‌ها، تهدیدها و معماری دفاعی
 </h3>
-<p style="color: var(--color-text-muted); font-size: 1.1rem;">
-بررسی مدل‌های احراز هویت، مدیریت توکن‌ها، تهدیدهای امنیتی و روش‌های محافظتی.
+<p style="color: var(--color-text-muted); font-size: 1.15rem; line-height: 1.9;">
+امنیت API یکی از مهم‌ترین بخش‌های طراحی است. هر API عمومی یا سازمانی باید تحت یک معماری امنیتی چندلایه اجرا شود.
 </p>
 <h4 class="anchored">
-۴.۱. انواع احراز هویت
-</h4>
-<dl>
-<dt>
-API Key
-</dt>
-<dd>
-<p>
-ساده، سریع و مناسب سرویس‌های عمومی اما امنیت متوسط.
-</p>
-</dd>
-<dt>
-JWT (JSON Web Token)
-</dt>
-<dd>
-<p>
-امضای دیجیتال، عدم نیاز به ذخیرهٔ وضعیت در سرور، مناسب SPA و Microservices.
-</p>
-</dd>
-<dt>
-OAuth2
-</dt>
-<dd>
-<p>
-استاندارد بین‌المللی برای دسترسی ایمن Third-Party مانند Google Login.
-</p>
-</dd>
-</dl>
-<h4 class="anchored">
-۴.۲. تهدیدها و محافظت
+۴.۱. روش‌های احراز هویت
 </h4>
 <ul>
 <li>
-Rate Limiting برای جلوگیری از سوءاستفاده
+<strong>API Key</strong> — ساده اما محدود در امنیت
 </li>
 <li>
-Input Validation برای جلوگیری از XSS و SQL Injection
+<strong>JWT</strong> — توکن امضاشده، مناسب سیستم‌های مدرن
 </li>
 <li>
-HTTPS برای رمزنگاری ترافیک
+<strong>OAuth2</strong> — مناسب سرویس‌های بزرگ و Third-Party
+</li>
+</ul>
+<h4 class="anchored">
+۴.۲. تهدیدها و راهکارها
+</h4>
+<ul>
+<li>
+<strong>Rate Limiting</strong> — جلوگیری از حملات درخواست انبوه
 </li>
 <li>
-CORS برای کنترل دسترسی کلاینت‌ها
+<strong>Input Validation</strong> — جلوگیری از XSS/SQL Injection
+</li>
+<li>
+<strong>HTTPS</strong> — رمزنگاری ارتباط
+</li>
+<li>
+<strong>CORS</strong> — کنترل دسترسی کلاینت‌ها
+</li>
+<li>
+<strong>Logging &amp; Auditing</strong> — ثبت رفتارهای مشکوک
 </li>
 </ul>
 </section>
 <section class="section-card">
 <h3 class="anchored">
-بخش پنجم: طراحی داده و ساختار JSON
+بخش پنجم: استانداردسازی پاسخ‌ها — قرارداد داده و مدیریت خطا
 </h3>
-<p style="color: var(--color-text-muted); font-size: 1.1rem;">
-طراحی پاسخ‌های استاندارد، خطاهای قابل‌پیش‌بینی و قرارداد داده.
+<p style="color: var(--color-text-muted); font-size: 1.15rem; line-height: 1.9;">
+یک API حرفه‌ای، قرارداد پاسخ یکپارچه دارد. یعنی همهٔ پاسخ‌ها — موفق یا خطا — یک ساختار مشخص دارند.
 </p>
 <h4 class="anchored">
-۵.۱. ساختاردهی پاسخ استاندارد
+۵.۱. پاسخ موفق
 </h4>
-<pre><code>
-{
+<pre><code>{
   "status": "success",
-  "data": {
-    "id": 1,
-    "username": "test-user"
-  },
+  "data": { ... },
   "timestamp": 1700000000
 }
 </code></pre>
 <h4 class="anchored">
-۵.۲. خطاهای استاندارد
+۵.۲. پاسخ خطا
 </h4>
-<pre><code>
-{
+<pre><code>{
   "status": "error",
   "message": "User not found",
   "code": 404
@@ -429,19 +345,18 @@ CORS برای کنترل دسترسی کلاینت‌ها
 </section>
 <section class="section-card">
 <h3 class="anchored">
-بخش ششم: پیاده‌سازی API پیشرفته با FastAPI
+بخش ششم: پیاده‌سازی API سطح سازمانی با FastAPI
 </h3>
-<p style="color: var(--color-text-muted); font-size: 1.1rem;">
-طراحی یک API کامل با ساختار ماژولار، مدل‌ها، اعتبارسنجی و مستندسازی خودکار.
+<p style="color: var(--color-text-muted); font-size: 1.15rem; line-height: 1.9;">
+FastAPI یک فریمورک فوق‌العاده سریع، مدرن و استاندارد برای ساخت APIهای مقیاس‌پذیر است.
 </p>
 <h4 class="anchored">
-۶.۱. نصب FastAPI
+۶.۱. نصب
 </h4>
-<pre><code>
-pip install fastapi uvicorn
+<pre><code>pip install fastapi uvicorn
 </code></pre>
 <h4 class="anchored">
-۶.۲. ایجاد یک API ساده
+۶.۲. پیاده‌سازی API پایه
 </h4>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastapi <span class="im">import</span> FastAPI</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel</span>
@@ -452,7 +367,7 @@ pip install fastapi uvicorn
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    username: <span class="bu">str</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    age: <span class="bu">int</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> []  <span class="co"># دیتابیس ساده در حافظه (In-Memory)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> []</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">@app.get</span>(<span class="st">"/users"</span>)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_users():</span>
@@ -465,37 +380,36 @@ pip install fastapi uvicorn
 <h4 class="anchored">
 ۶.۳. اجرای سرور
 </h4>
-<pre><code>
-uvicorn main:app --reload
+<pre><code>uvicorn main:app --reload
 </code></pre>
 <h4 class="anchored">
-۶.۴. مستندسازی خودکار
+۶.۴. مستندات خودکار
 </h4>
 <ul>
 <li>
-/docs → Swagger (تست تعاملی API)
+/docs — Swagger UI
 </li>
 <li>
-/redoc → Redocly (مناسب مستندات سازمانی)
+/redoc — Redocly Documentation
 </li>
 </ul>
 </section>
 <section class="section-card">
 <h3 class="anchored">
-بخش هفتم: قابلیت‌های پیشرفته — فیلترها، پارامترها و صفحه‌بندی
+بخش هفتم: قابلیت‌های پیشرفته — فیلتر، صفحه‌بندی، Middleware
 </h3>
-<p style="color: var(--color-text-muted); font-size: 1.1rem;">
-تکنیک‌های واقعی مورد استفاده در APIهای Enterprise.
+<p style="color: var(--color-text-muted); font-size: 1.15rem; line-height: 1.9;">
+در APIهای سازمانی، فیلتر، جستجو، اعتبارسنجی، نسخه‌بندی و Middleware اجباری هستند.
 </p>
 <h4 class="anchored">
-۷.۱. کوئری‌پارامترهای هوشمند
+۷.۱. فیلتر داده
 </h4>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">@app.get</span>(<span class="st">"/search"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> search_users(min_age: <span class="bu">int</span> <span class="op">=</span> <span class="dv">0</span>, max_age: <span class="bu">int</span> <span class="op">=</span> <span class="dv">120</span>):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> [u <span class="cf">for</span> u <span class="kw">in</span> db <span class="cf">if</span> min_age <span class="op">&lt;=</span> u[<span class="st">"age"</span>] <span class="op">&lt;=</span> max_age]</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"results"</span>: result}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <h4 class="anchored">
-۷.۲. صفحه‌بندی (Pagination)
+۷.۲. صفحه‌بندی استاندارد
 </h4>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">@app.get</span>(<span class="st">"/users/page"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> paginated_users(page: <span class="bu">int</span> <span class="op">=</span> <span class="dv">1</span>, size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">10</span>):</span>
@@ -503,58 +417,178 @@ uvicorn main:app --reload
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    end <span class="op">=</span> start <span class="op">+</span> size</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> db[start:end]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <h4 class="anchored">
-۷.۳. Middleware (لاگ، امنیت، هدرها)
+۷.۳. Middleware
 </h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastapi <span class="im">import</span> Request</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">@app.middleware</span>(<span class="st">"http"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> logger(request: Request, call_next):</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"New Request:"</span>, request.url)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> <span class="cf">await</span> call_next(request)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">@app.middleware</span>(<span class="st">"http"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> logger(request: Request, call_next):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"New Request:"</span>, request.url)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> <span class="cf">await</span> call_next(request)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+<section class="section-card" style="margin-bottom:3rem;">
+<h3 style="font-size:1.7rem;" class="anchored">
+بخش تکمیلی: تفاوت API با وب‌سرویس‌ها و معماری‌های ارتباطی
+</h3>
+<p style="color: var(--color-text-muted); font-size:1.15rem; line-height:1.9;">
+یکی از سردرگمی‌های رایج، تفاوت میان API و Web Service است. هرچند این دو گاهی به‌جای هم استفاده می‌شوند، اما از نظر معماری و حوزهٔ کاربرد، تفاوت‌های مهمی دارند.
+</p>
+<h4 class="anchored">
+۱. API چیست؟
+</h4>
+<p>
+هر رابطی که امکان تعامل نرم‌افزاری بین دو سیستم را فراهم کند: از توابع داخلی یک زبان تا سرویس‌های تحت وب. API یک مفهوم «عام‌تر» است.
+</p>
+<h4 class="anchored">
+۲. Web Service چیست؟
+</h4>
+<p>
+وب‌سرویس یک نوع «API مبتنی بر شبکه» است که حتماً از پروتکل‌های تحت وب (HTTP / SOAP / XML-RPC) استفاده می‌کند. یعنی وب‌سرویس زیرمجموعه‌ای از API محسوب می‌شود.
+</p>
+<h4 class="anchored">
+تفاوت‌های کلیدی
+</h4>
+<ul>
+<li>
+<strong>API</strong> یک مفهوم کلی است، اما <strong>وب‌سرویس</strong> فقط در بستر شبکه و معمولاً اینترنت کار می‌کند.
+</li>
+<li>
+وب‌سرویس‌های SOAP معمولاً از XML و قراردادهای سخت‌گیرانه استفاده می‌کنند؛ APIهای مدرن REST از JSON.
+</li>
+<li>
+API ممکن است اصلاً در وب وجود نداشته باشد—مثلاً API داخلی سیستم‌عامل.
+</li>
+<li>
+REST API سبک‌تر، سریع‌تر، و مستقل از قالب داده است.
+</li>
+</ul>
+</section>
+<section class="section-card" style="margin-bottom:3rem;">
+<h3 style="font-size:1.7rem;" class="anchored">
+بخش نهایی: پروژهٔ عملی — ساخت API خلاصه‌ساز متن با FastAPI و یک مدل رایگان هوش مصنوعی
+</h3>
+<p style="color: var(--color-text-muted); font-size:1.15rem; line-height:1.9;">
+در این پروژه، یک API واقعی می‌سازیم که متن ورودی را گرفته و با استفاده از یک مدل متن‌باز (رایگان) آن را خلاصه می‌کند.
+</p>
+<h4 class="anchored">
+مرحله ۱: نصب پکیج‌ها
+</h4>
+<pre><code>pip install fastapi uvicorn transformers torch</code></pre>
+<h4 class="anchored">
+مرحله ۲: انتخاب مدل رایگان
+</h4>
+<p>
+ما از مدل <strong>facebook/bart-large-cnn</strong> برای خلاصه‌سازی استفاده می‌کنیم. این مدل کاملاً رایگان و متن‌باز است.
+</p>
+<h4 class="anchored">
+مرحله ۳: کدنویسی API
+</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastapi <span class="im">import</span> FastAPI</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> pipeline</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># بارگذاری مدل خلاصه‌سازی</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>summarizer <span class="op">=</span> pipeline(<span class="st">"summarization"</span>, model<span class="op">=</span><span class="st">"facebook/bart-large-cnn"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> FastAPI()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TextInput(BaseModel):</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    text: <span class="bu">str</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="at">@app.post</span>(<span class="st">"/summarize"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize_text(data: TextInput):</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> summarizer(data.text, max_length<span class="op">=</span><span class="dv">150</span>, min_length<span class="op">=</span><span class="dv">30</span>, do_sample<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"status"</span>: <span class="st">"success"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"summary"</span>: result[<span class="dv">0</span>][<span class="st">"summary_text"</span>]</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h4 class="anchored">
+مرحله ۴: اجرای سرور
+</h4>
+<pre><code>uvicorn main:app --reload</code></pre>
+<h4 class="anchored">
+مرحله ۵: تست API
+</h4>
+<p>
+ارسال یک درخواست POST به مسیر <code>/summarize</code>:
+</p>
+<pre><code>{
+  "text": "اینجا یک متن طولانی قرار می‌گیرد که باید خلاصه شود ..."
+}</code></pre>
+<h4 class="anchored">
+مرحله ۶: مستندات خودکار
+</h4>
+<ul>
+<li>
+<code>/docs</code> → Swagger UI
+</li>
+<li>
+<code>/redoc</code> → مستندات Redoc
+</li>
+</ul>
+<h4 class="anchored">
+توضیح فرایند
+</h4>
+<ul>
+<li>
+API یک متن دریافت می‌کند.
+</li>
+<li>
+متن وارد مدل BART می‌شود.
+</li>
+<li>
+مدل نسخهٔ کوتاه، خلاصه‌شده و منسجم متن را تولید می‌کند.
+</li>
+<li>
+API خلاصه را در قالب JSON برمی‌گرداند.
+</li>
+</ul>
+<p>
+این پروژه یک نمونهٔ کامل از اتصال FastAPI با یک مدل هوش مصنوعی است—بدون نیاز به هیچ سرویس پولی.
+</p>
+</section>
+
 <section class="section-card">
 <h3 class="anchored">
-بخش هشتم: تمرین‌ها و پروژه نهایی
+بخش هشتم: تمرین‌ها و پروژه نهایی حرفه‌ای
 </h3>
 <h4 class="anchored">
-۸.۱. تمرین‌های سطح پیشرفته
+۸.1 تمرین‌ها
 </h4>
 <ul>
 <li>
 پیاده‌سازی JWT با Refresh Token
 </li>
 <li>
-ساخت Rate Limiter با حافظه یا Redis
+ایجاد Rate Limiter
 </li>
 <li>
-ایجاد API آپلود فایل با اعتبارسنجی
+طراحی API آپلود فایل
 </li>
 <li>
-ایجاد سیستم Cache با TTL
+سیستم Cache مبتنی بر Redis
 </li>
 </ul>
 <h4 class="anchored">
-۸.۲. پروژه نهایی
+۸.2 پروژه نهایی
 </h4>
 <p>
-ساخت یک <strong>API کامل مدیریت کاربران</strong> با امکانات زیر:
+ساخت API مدیریت کاربران با:
 </p>
 <ul>
 <li>
 CRUD کامل
 </li>
 <li>
-Swagger Documentation
-</li>
-<li>
 JWT Authentication
 </li>
 <li>
-Middleware برای لاگ و امنیت
+Swagger Documentation
 </li>
 <li>
-Validation سطح پیشرفته
+Middleware امنیتی
+</li>
+<li>
+Validation پیشرفته
 </li>
 </ul>
 </section>
