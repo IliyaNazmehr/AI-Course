@@ -1,0 +1,28 @@
+{% extends "index.html" %} {%load static%} {%block content%}
+<div class="container d-flex justify-content-center mt-5">
+  <div class="col-md-6 text-center">
+
+    <h2 class="mb-3">Logout</h2>
+    <p class="text-muted">Are you sure you want to logout?</p>
+
+    <form method="POST" action="{% url 'account_logout' %}">
+      {% csrf_token %}
+
+      <!-- Required by Allauth -->
+      {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+      {% endif %}
+
+      <button type="submit" class="btn btn-danger w-100 mt-3">
+        Logout
+      </button>
+
+      <a href="/" class="btn btn-secondary w-100 mt-2">
+        Cancel
+      </a>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

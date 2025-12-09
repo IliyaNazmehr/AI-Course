@@ -1,0 +1,87 @@
+{% extends "index.html" %} {% load static %} {% block content %}
+<div class="container mt-5">
+  <h2>Your Summary History</h2>
+  <br />
+
+  {% if page_obj %}
+  <div class="d-flex flex-column gap-3">
+    {% for h in page_obj %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          Summary at {{ h.created_at|date:"Y-m-d H:i" }}
+        </h5>
+
+        <!-- Truncated Input and Summary -->
+        <p><strong>Input:</strong> {{ h.input_text|truncatechars:80 }}</p>
+        <p><strong>Summary:</strong> {{ h.summary_text|truncatechars:80 }}</p>
+
+        <!-- Button to toggle full text -->
+        <button
+          class="btn btn-sm btn-link"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapse{{ forloop.counter }}"
+          aria-expanded="false"
+          aria-controls="collapse{{ forloop.counter }}"
+        >
+          View More
+        </button>
+
+        <!-- Collapsible full text -->
+        <div class="collapse mt-2" id="collapse{{ forloop.counter }}">
+          <div class="card card-body">
+            <p><strong>Input:</strong></p>
+            <p>{{ h.input_text }}</p>
+            <p><strong>Summary:</strong></p>
+            <p>{{ h.summary_text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination controls -->
+  <nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+          >Previous</a
+        >
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Previous</span>
+      </li>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+       {% if page_obj.number == num %}
+      <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+      {% elif num >= page_obj.number|add:"-2" and num <= page_obj.number|add:"2"%}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+      </li>
+      {% endif %} 
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+          >Next</a
+        >
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Next</span>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  {% else %}
+  <p>You have no summaries yet.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

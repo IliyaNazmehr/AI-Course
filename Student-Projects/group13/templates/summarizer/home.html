@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+
+      <div class="card shadow-lg">
+        <div class="card-body">
+
+
+          <h4 class="card-title text-center mb-4">Enter Your Text</h4>
+
+          <form action="{% url 'sum' %}" method="POST" id="textForm">
+            {% csrf_token %}
+            <div class="mb-3">
+
+              <textarea 
+                class="form-control" 
+                id="textInput" 
+                name="text" 
+                rows="16" 
+                placeholder="Paste or type your text here..."
+                required>{{ form.text.value|default_if_none:'' }}</textarea>
+
+              <div class="form-text text-end">
+                <span id="wordCount">0</span>/500 words
+              </div>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary" id="submitBtn">Summarize</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}
