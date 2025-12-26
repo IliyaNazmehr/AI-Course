@@ -1,0 +1,68 @@
+version: "2.0"
+
+# =====================================================
+# CONVERSATION STORIES - California Travel Assistant
+# =====================================================
+# This file contains conversation flows for training the dialogue model.
+#
+# Story Structure:
+# - story: Descriptive name of the conversation flow
+#   steps: Sequence of intents, actions, and slot settings
+#
+# Types of Stories:
+# 1. Basic Interactions: Greetings, farewells, bot identity
+# 2. Success Paths: Complete user journeys for each feature
+# 3. Error Handling: Fallback and recovery scenarios
+# 4. Form Flows: Multi-turn conversations with slot filling
+#
+# Each story represents a complete user-bot interaction pattern.
+# Stories are used by Rasa's ML policies to learn dialogue management.
+#
+# Current Stories Include:
+# - Basic greetings and bot challenge responses
+# - Weather information retrieval flows
+# - Place search and discovery journeys
+# - Event finding and ticket information scenarios
+#
+# =====================================================
+
+stories:
+
+ # ==================== BASIC INTERACTIONS ====================
+
+  - story: basic greet
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - story: bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_bot_challenge
+
+ # ==================== WEATHER FEATURE FLOWS ====================
+
+  - story: weather success path
+    steps:
+      - intent: ask_current_weather
+      - slot_was_set:
+          - city: "California" 
+      - action: action_get_weather
+
+ # ==================== PLACES FEATURE FLOWS ====================
+
+  - story: place success path
+    steps:
+      - intent: search_places_by_category
+      - slot_was_set:
+          - place_category: "restaurant"
+      - action: action_search_places_by_category
+
+# ==================== EVENTS FEATURE FLOWS ====================
+
+  - story: event success path
+    steps:
+      - intent: search_events_by_date_range
+      - slot_was_set:
+          - date_range: "tomorrow"
+      - action: action_search_events_by_date_range

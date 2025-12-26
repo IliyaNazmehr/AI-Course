@@ -10,7 +10,9 @@ Users can enter text, receive an AI-generated summary, and view their personal s
 ## Team members:
    * Sepanta MohammadGholian(40110130117210)
    * Faramarz Daniali(40110130117235)
+   * Seyed Younes Hoseini Firozz (40110130117027)
    * Amirali Abedzade
+   * Seyed Younes Hoseini Firozz (40110130117027)
    * Mojtaba Marhamati Gashti(40110130117052)
 ## Features
 * AI Text Summarization

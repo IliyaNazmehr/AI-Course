@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- ===================================================== -->
+    <!-- CALIFORNIA TRAVEL ASSISTANT - CHAT INTERFACE -->
+    <!-- ===================================================== -->
+    <!-- Main HTML file for the California Travel Assistant chat interface -->
+    <!-- 
+    Structure:
+    1. Head: Meta tags, title, and external dependencies
+    2. Body: 
+        - Container: Main wrapper
+        - Decorative Stickers: California-themed visual elements
+        - Chat Header: Bot identity and status
+        - Chat Container: Message display and input area
+        - Footer: Copyright and branding
+    
+    External Dependencies:
+    - Font Awesome 6.4.0: Icons library
+    - Google Fonts (Poppins): Typography
+    - Socket.IO 4.7.2: Real-time communication
+    - style.css: Custom stylesheet
+    - script.js: Main application logic
+    
+    Last Updated: 2024-12-28
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Bot - Travel Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- MAIN CONTAINER - Wraps entire chat interface -->
+    <div class="container">
+        <!-- DECORATIVE STICKERS - California theme visual elements -->
+        <div class="palm-tree sticker" id="palm-tree"></div>
+        <div class="sun sticker" id="sun"></div>
+        <div class="sea sticker" id="sea"></div>
+        
+        <!-- CHAT HEADER - Bot identity and status display -->
+        <header class="chat-header">
+            <div class="header-content">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="header-text">
+                    <h1>California Bot</h1>
+                    <p class="subtitle">Your California Travel Assistant</p>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot online"></div>
+                    <span>Online</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- CHAT MESSAGES SECTION - Main conversation area -->
+        <div class="chat-container">
+            <!-- MESSAGES DISPLAY - Where chat messages appear -->
+            <div class="chat-messages" id="chat-messages">
+                <!-- WELCOME MESSAGE - Initial bot greeting -->
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            Hello! I'm California Bot, your travel assistant for California. How can I help you today?
+                        </div>
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+                
+                <!-- SUGGESTED TOPICS - Quick action suggestions -->
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            You can ask me about:
+                            <div class="suggestions">
+                                <span class="suggestion-tag">Weather in cities</span>
+                                <span class="suggestion-tag">Restaurants & places</span>
+                                <span class="suggestion-tag">Events & activities</span>
+                                <span class="suggestion-tag">Travel tips</span>
+                            </div>
+                        </div>
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TYPING INDICATOR - Shows when bot is "typing" -->
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="typing-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <span class="typing-text">California Bot is typing...</span>
+            </div>
+            
+            <!-- MESSAGE INPUT - User input area and quick actions -->
+            <div class="message-input-container">
+                <div class="input-wrapper">
+                    <input type="text" id="message-input" placeholder="Type your message here..." autocomplete="off">
+                    <button id="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="quick-actions">
+                    <button class="quick-action-btn" data-message="What's the weather in Los Angeles?">
+                        <i class="fas fa-sun"></i> LA Weather
+                    </button>
+                    <button class="quick-action-btn" data-message="Find restaurants in San Francisco">
+                        <i class="fas fa-utensils"></i> SF Restaurants
+                    </button>
+                    <button class="quick-action-btn" data-message="Events in San Diego">
+                        <i class="fas fa-calendar-alt"></i> SD Events
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FOOTER - Copyright and branding -->
+        <footer class="chat-footer">
+            <p>California Bot • Made with <i class="fas fa-heart"></i> • Travel Assistant for California</p>
+        </footer>
+    </div>
+    
+    <!-- EXTERNAL SCRIPTS -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

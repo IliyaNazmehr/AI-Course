@@ -1,0 +1,1903 @@
+version: "2.0"
+
+# =====================================================
+# NLU TRAINING DATA - California Travel Assistant
+# =====================================================
+# This file contains Natural Language Understanding training data.
+#
+# File Structure:
+# 1. Intents: User intentions with annotated examples
+# 2. Entity Synonyms: Variations and mappings for entity values
+# 3. Regex Patterns: Pattern-based entity extraction rules
+# 4. Lookup Tables: Predefined lists of entity values
+# 5. Basic Intents: Core conversational intents
+#
+# Data Organization:
+# - Weather Intents: OpenWeather API integrations
+# - Places Intents: Foursquare API place searches
+# - Events Intents: Eventbrite API event discovery
+# - Combination Intents: Multi-service interactions
+# - Personalization: User preference-based recommendations
+# - Trip Planning: Itinerary creation and planning
+# - Comparison: Comparative analysis between locations
+# - Practical Info: Operational and logistical information
+# - Seasonal Activities: Time-based activity suggestions
+# - Emergency Info: Safety and emergency services
+#
+# Entity Types Defined:
+# - city: California cities and locations
+# - landmark: Famous attractions and points of interest
+# - place_category: Types of venues and establishments
+# - date_range: Time periods and temporal expressions
+# - price_range: Cost categories and affordability levels
+# - activity_type: Categories of activities and experiences
+#
+# Important Notes:
+# 1. Each intent contains 50+ diverse examples for robust training
+# 2. Entities are annotated using [value](entity_type) syntax
+# 3. Synonyms ensure consistent entity recognition across variations
+# 4. Regex patterns handle structured text patterns
+# 5. Lookup tables provide known value lists for specific entities
+#
+# Training Guidelines:
+# - Add new examples regularly to improve NLU accuracy
+# - Maintain consistent entity naming conventions
+# - Balance example distribution across intents
+# - Include edge cases and alternative phrasings
+#
+# =====================================================
+
+
+nlu:
+
+## ==================== WEATHER INTENTS (OpenWeather API) ====================
+
+- intent: ask_current_weather
+  examples: |
+    - What's the weather in [Los Angeles](city) now?
+    - Current weather in [San Francisco](city)?
+    - How's it outside in [San Diego](city)?
+    - Weather report for [Sacramento](city)
+    - Real-time weather update in [San Jose](city)
+    - Current conditions at [Oakland](city)
+    - How's the climate in [Santa Barbara](city) now?
+    - Tell me the weather in [Riverside](city)
+    - What's the sky like in [Fresno](city)?
+    - Outside temperature in [Long Beach](city)
+    - Weather right now in [Anaheim](city)
+    - Live report from [Bakersfield](city)
+    - Weather today in [Irvine](city)
+    - Conditions currently in [Modesto](city)
+    - Real-time climate info [Stockton](city)
+    - How's the weather at [Santa Rosa](city)?
+    - Live data for [Pasadena](city)
+    - Weather update in [Palm Springs](city)
+    - What's going on weather-wise in [Monterey](city)?
+    - Current atmospheric status in [Santa Cruz](city)
+    - How is it outside in [Berkeley](city)?
+    - Weather snapshot for [Palo Alto](city)
+    - Give me today's weather in [Malibu](city)
+    - Current weather metrics [Laguna Beach](city)
+    - Weather update [Napa](city)
+    - Temperature and conditions in [Santa Monica](city)
+    - What's happening in [Burbank](city) weather-wise?
+    - Live forecast for [Glendale](city)
+    - Current conditions in [Huntington Beach](city)
+    - Weather now [Newport Beach](city)
+    - Quick weather check [Los Angeles](city)
+    - Weather info for [San Francisco](city)
+    - What's the weather update in [San Diego](city)?
+    - Tell me outside conditions [Sacramento](city)
+    - Weather at this moment [San Jose](city)
+    - Live temperature for [Oakland](city)
+    - How's it looking outside [Santa Barbara](city)?
+    - Present weather [Riverside](city)
+    - Weather details for [Fresno](city)
+    - Current sky conditions [Long Beach](city)
+    - Update me on the weather in [Anaheim](city)
+    - How's the climate today [Bakersfield](city)?
+    - What's the real-time weather in [Irvine](city)?
+    - Weather info right now [Modesto](city)
+    - Current temp and conditions [Stockton](city)
+    - Outside weather [Santa Rosa](city)
+    - Weather report update [Pasadena](city)
+    - Give current weather [Palm Springs](city)
+    - Weather info [Monterey](city)
+    - How's it going outside [Santa Cruz](city)?
+    - Present conditions [Berkeley](city)
+    - Current climate status [Palo Alto](city)
+    - Update on today's weather [Malibu](city)
+    - weather
+    - check the weather
+
+- intent: ask_temperature_specific
+  examples: |
+    - Temp in [Los Angeles](city) now?
+    - What's the current temperature [San Francisco](city)?
+    - Temperature reading for [San Diego](city)
+    - How hot is it in [Sacramento](city)?
+    - Current thermometer at [San Jose](city)
+    - Temperature right now [Oakland](city)
+    - Exact temperature [Santa Barbara](city)
+    - What's the mercury showing in [Riverside](city)?
+    - Temp reading [Fresno](city)
+    - Current temp [Long Beach](city)
+    - How warm is it [Anaheim](city)?
+    - Temperature right this minute [Bakersfield](city)
+    - What's the exact temp [Irvine](city)?
+    - Temp status [Modesto](city)
+    - Measure temperature [Stockton](city)
+    - Temperature now [Santa Rosa](city)
+    - Exact temp [Pasadena](city)
+    - Current temp reading [Palm Springs](city)
+    - Temperature info [Monterey](city)
+    - What's the temperature [Santa Cruz](city)?
+    - Current temperature [Berkeley](city)
+    - Temp update [Palo Alto](city)
+    - How's the thermometer [Malibu](city)?
+    - Exact measurement [Laguna Beach](city)
+    - Temperature today [Napa](city)
+    - Temp status now [Santa Monica](city)
+    - How hot or cold [Burbank](city)?
+    - Current mercury [Glendale](city)
+    - Temperature data [Huntington Beach](city)
+    - Real-time temp [Newport Beach](city)
+    - Temperature report [Los Angeles](city)
+    - Current reading [San Francisco](city)
+    - Exact temperature measurement [San Diego](city)
+    - Thermometer reading now [Sacramento](city)
+    - How warm is it outside [San Jose](city)?
+    - Current temp check [Oakland](city)
+    - What's the temp today [Santa Barbara](city)?
+    - Current weather temp [Riverside](city)
+    - Temperature info now [Fresno](city)
+    - Exact reading [Long Beach](city)
+    - Temperature measurement [Anaheim](city)
+    - What's the temp like [Bakersfield](city)?
+    - Temperature stats [Irvine](city)
+    - Temperature value [Modesto](city)
+    - Current heat [Stockton](city)
+    - How warm right now [Santa Rosa](city)?
+    - Temperature overview [Pasadena](city)
+    - Exact temperature value [Palm Springs](city)
+    - Temp report now [Monterey](city)
+    - Temp reading today [Santa Cruz](city)
+    - Current temperature data [Berkeley](city)
+    - temperature
+    - check the temperature
+
+- intent: ask_humidity_specific
+  examples: |
+    - Humidity in [Los Angeles](city)?
+    - What's the current humidity [San Francisco](city)?
+    - Humidity level [San Diego](city)
+    - Air moisture [Sacramento](city)
+    - Current relative humidity [San Jose](city)
+    - Humidity measurement [Oakland](city)
+    - Moisture in the air [Santa Barbara](city)
+    - Relative humidity now [Riverside](city)
+    - Humidity percentage [Fresno](city)
+    - Current humidity info [Long Beach](city)
+    - How humid is it [Anaheim](city)?
+    - Humidity reading [Bakersfield](city)
+    - Moisture content [Irvine](city)
+    - Relative humidity measurement [Modesto](city)
+    - Humidity update [Stockton](city)
+    - Current moisture [Santa Rosa](city)
+    - Humidity status [Pasadena](city)
+    - Air humidity [Palm Springs](city)
+    - Humidity report [Monterey](city)
+    - Present humidity [Santa Cruz](city)
+    - Humidity level today [Berkeley](city)
+    - Moisture reading [Palo Alto](city)
+    - Current humidity stats [Malibu](city)
+    - Humidity percentage now [Laguna Beach](city)
+    - Humidity info [Napa](city)
+    - How humid [Santa Monica](city)?
+    - Present humidity measurement [Burbank](city)
+    - Humidity now [Glendale](city)
+    - Air moisture level [Huntington Beach](city)
+    - Humidity reading today [Newport Beach](city)
+    - Current humidity [Los Angeles](city)
+    - Relative humidity [San Francisco](city)
+    - Humidity percentage [San Diego](city)
+    - Humidity status now [Sacramento](city)
+    - Moisture reading [San Jose](city)
+    - Current humidity value [Oakland](city)
+    - Humidity check [Santa Barbara](city)
+    - Present air moisture [Riverside](city)
+    - Current humidity report [Fresno](city)
+    - Relative moisture [Long Beach](city)
+    - Humidity measurement today [Anaheim](city)
+    - Air humidity stats [Bakersfield](city)
+    - Present moisture level [Irvine](city)
+    - Humidity details [Modesto](city)
+    - Moisture info [Stockton](city)
+    - Current humidity reading [Santa Rosa](city)
+    - Humidity update now [Pasadena](city)
+    - Relative humidity value [Palm Springs](city)
+    - Humidity report now [Monterey](city)
+    - humidity
+    - check the humidity
+
+- intent: ask_weather_forecast
+  examples: |
+    - 3-day forecast [Los Angeles](city)
+    - Weekly weather in [San Francisco](city)
+    - 5-day weather [San Diego](city)
+    - Next week's forecast [Sacramento](city)
+    - Extended forecast [San Jose](city)
+    - 7-day weather [Oakland](city)
+    - Forecast for next week [Santa Barbara](city)
+    - Upcoming days forecast [Riverside](city)
+    - 10-day weather outlook [Fresno](city)
+    - Long-range weather [Long Beach](city)
+    - Forecast this week [Anaheim](city)
+    - 3-day outlook [Bakersfield](city)
+    - Next 5 days forecast [Irvine](city)
+    - Week forecast [Modesto](city)
+    - Extended weather [Stockton](city)
+    - Forecast for weekend [Santa Rosa](city)
+    - Next week weather [Pasadena](city)
+    - Forecast coming days [Palm Springs](city)
+    - Weather projection [Monterey](city)
+    - Upcoming weekend forecast [Santa Cruz](city)
+    - 7-day outlook [Berkeley](city)
+    - Forecast for next weekend [Palo Alto](city)
+    - Extended weather [Malibu](city)
+    - Next week projection [Laguna Beach](city)
+    - Forecast upcoming days [Napa](city)
+    - 3-day weather [Santa Monica](city)
+    - Next 10-day forecast [Burbank](city)
+    - Weather outlook [Glendale](city)
+    - Forecast for next 7 days [Huntington Beach](city)
+    - Upcoming 5-day forecast [Newport Beach](city)
+
+- intent: ask_weather_alerts
+  examples: |
+    - Any weather alerts [Los Angeles](city)?
+    - Storm warnings [San Francisco](city)
+    - Severe weather in [San Diego](city)
+    - Alerts [Sacramento](city)
+    - Weather warnings [San Jose](city)
+    - Hazard notifications [Oakland](city)
+    - Extreme weather [Santa Barbara](city)
+    - Weather advisory [Riverside](city)
+    - Storm watch [Fresno](city)
+    - Emergency alerts [Long Beach](city)
+    - Weather hazards [Anaheim](city)
+    - Alert messages [Bakersfield](city)
+    - Warning notifications [Irvine](city)
+    - Weather hazard info [Modesto](city)
+    - Storm alerts [Stockton](city)
+    - Weather advisory messages [Santa Rosa](city)
+    - Emergency warnings [Pasadena](city)
+    - Weather alerts system [Palm Springs](city)
+    - Hazard update [Monterey](city)
+    - Weather warning info [Santa Cruz](city)
+    - Emergency weather [Berkeley](city)
+    - Alert info [Palo Alto](city)
+    - Hazard warnings [Malibu](city)
+    - Weather emergency [Laguna Beach](city)
+    - Alert notifications [Napa](city)
+    - Storm hazard [Santa Monica](city)
+    - Weather advisory system [Burbank](city)
+    - Alert updates [Glendale](city)
+    - Emergency notifications [Huntington Beach](city)
+    - Weather hazard alerts [Newport Beach](city)
+    - weather alerts
+    - check the weather alerts
+
+## ==================== PLACES INTENTS (Foursquare API) ====================
+
+- intent: search_places_by_category
+  examples: |
+    - Find me [Italian restaurants](place_category) in [Los Angeles](city)
+    - Search for [vegan cafes](place_category) in [San Francisco](city)
+    - Look up [luxury hotels](place_category) in [San Diego](city)
+    - Find [art museums](place_category) in [Sacramento](city)
+    - Search [hiking trails](place_category) in [San Jose](city)
+    - Look for [beachfront resorts](place_category) in [Oakland](city)
+    - Find [wine tasting rooms](place_category) in [Santa Barbara](city)
+    - Search [gourmet restaurants](place_category) in [Riverside](city)
+    - Look up [modern art galleries](place_category) in [Fresno](city)
+    - Find [shopping centers](place_category) in [Long Beach](city)
+    - Search [family restaurants](place_category) in [Anaheim](city)
+    - Look for [sports bars](place_category) in [Bakersfield](city)
+    - Find [co-working spaces](place_category) in [Irvine](city)
+    - Search [public parks](place_category) in [Modesto](city)
+    - Look up [local markets](place_category) in [Stockton](city)
+    - Find [historic landmarks](place_category) in [Santa Rosa](city)
+    - Search [rooftop bars](place_category) in [Pasadena](city)
+    - Look for [golf courses](place_category) in [Palm Springs](city)
+    - Find [aquariums](place_category) in [Monterey](city)
+    - Search [beach clubs](place_category) in [Santa Cruz](city)
+    - Look up [bookstores](place_category) in [Berkeley](city)
+    - Find [coffee roasters](place_category) in [Palo Alto](city)
+    - Search [sushi restaurants](place_category) in [Malibu](city)
+    - Look for [beach resorts](place_category) in [Laguna Beach](city)
+    - Find [wine bars](place_category) in [Napa](city)
+    - Search [boutique hotels](place_category) in [Santa Monica](city)
+    - Look up [movie theaters](place_category) in [Burbank](city)
+    - Find [shopping malls](place_category) in [Glendale](city)
+    - Search [beach restaurants](place_category) in [Huntington Beach](city)
+    - Look for [marina restaurants](place_category) in [Newport Beach](city)
+    - find some places
+    - show me landmarks
+    - I want to visit somewhere
+    - where can I go?
+
+- intent: search_places_near_location
+  examples: |
+    - [Restaurants](place_category) near [Golden Gate Park](landmark) in [San Francisco](city)
+    - [Hotels](place_category) close to [Disneyland](landmark) in [Anaheim](city)
+    - [Cafes](place_category) around [Santa Monica Pier](landmark) in [Los Angeles](city)
+    - [Museums](place_category) near [Balboa Park](landmark) in [San Diego](city)
+    - [Bars](place_category) close to [Gaslamp Quarter](landmark) in [San Diego](city)
+    - [Shops](place_category) around [Union Square](landmark) in [San Francisco](city)
+    - [Restaurants](place_category) near [Hollywood Walk of Fame](landmark) in [Los Angeles](city)
+    - [Hotels](place_category) close to [Fisherman's Wharf](landmark) in [San Francisco](city)
+    - [Cafes](place_category) around [Venice Beach](landmark) in [Los Angeles](city)
+    - [Museums](place_category) near [Getty Center](landmark) in [Los Angeles](city)
+    - [Bars](place_category) close to [Gaslamp District](landmark) in [San Diego](city)
+    - [Shops](place_category) around [Rodeo Drive](landmark) in [Beverly Hills](city)
+    - [Restaurants](place_category) near [Universal Studios](landmark) in [Hollywood](city)
+    - [Hotels](place_category) close to [San Diego Zoo](landmark) in [San Diego](city)
+    - [Cafes](place_category) around [Santa Cruz Beach Boardwalk](landmark) in [Santa Cruz](city)
+    - [Museums](place_category) near [California Academy of Sciences](landmark) in [San Francisco](city)
+    - [Bars](place_category) close to [Bourbon Street](landmark) in [New Orleans](city)
+    - [Shops](place_category) around [Powell Street](landmark) in [San Francisco](city)
+    - [Restaurants](place_category) near [Griffith Observatory](landmark) in [Los Angeles](city)
+    - [Hotels](place_category) close to [Yosemite National Park](landmark) in [Yosemite](city)
+    - [Cafes](place_category) around [Lake Tahoe](landmark) in [Tahoe City](city)
+    - [Museums](place_category) near [LACMA](landmark) in [Los Angeles](city)
+    - [Bars](place_category) close to [Sunset Strip](landmark) in [West Hollywood](city)
+    - [Shops](place_category) around [Third Street Promenade](landmark) in [Santa Monica](city)
+    - [Restaurants](place_category) near [Pier 39](landmark) in [San Francisco](city)
+    - [Hotels](place_category) close to [Monterey Bay Aquarium](landmark) in [Monterey](city)
+    - [Cafes](place_category) around [Carmel-by-the-Sea](landmark) in [Carmel](city)
+    - [Museums](place_category) near [Hearst Castle](landmark) in [San Simeon](city)
+    - [Bars](place_category) close to [Gaslamp Quarter](landmark) in [San Diego](city)
+    - [Shops](place_category) around [Old Town](landmark) in [San Diego](city)
+
+- intent: search_places_with_filters
+  examples: |
+    - [Restaurants](place_category) in [Los Angeles](city) with [outdoor seating](filter)
+    - [Hotels](place_category) in [San Francisco](city) that are [pet friendly](filter)
+    - [Cafes](place_category) in [San Diego](city) with [free wifi](filter)
+    - Find [bars](place_category) in [Sacramento](city) that have [live music](filter)
+    - [Museums](place_category) in [San Jose](city) with [free admission](filter)
+    - Search for [parks](place_category) in [Oakland](city) that allow [dogs](filter)
+    - [Restaurants](place_category) in [Santa Barbara](city) with [ocean view](filter)
+    - [Hotels](place_category) in [Riverside](city) that have [swimming pool](filter)
+    - [Cafes](place_category) in [Fresno](city) with [vegan options](filter)
+    - Find [gyms](place_category) in [Long Beach](city) that are [24 hours](filter)
+    - [Restaurants](place_category) in [Anaheim](city) with [gluten-free menu](filter)
+    - [Hotels](place_category) in [Bakersfield](city) that offer [breakfast included](filter)
+    - [Cafes](place_category) in [Irvine](city) with [study areas](filter)
+    - Find [bookstores](place_category) in [Modesto](city) that serve [coffee](filter)
+    - [Museums](place_category) in [Stockton](city) with [guided tours](filter)
+    - [Parks](place_category) in [Santa Rosa](city) that have [playgrounds](filter)
+    - [Restaurants](place_category) in [Pasadena](city) with [private dining](filter)
+    - [Hotels](place_category) in [Palm Springs](city) that have [spa services](filter)
+    - [Cafes](place_category) in [Monterey](city) with [oceanfront seating](filter)
+    - Find [wineries](place_category) in [Napa](city) that offer [tastings](filter)
+    - [Restaurants](place_category) in [Santa Monica](city) with [rooftop dining](filter)
+    - [Hotels](place_category) in [Burbank](city) that have [airport shuttle](filter)
+    - [Cafes](place_category) in [Berkeley](city) with [local art](filter)
+    - Find [beaches](place_category) in [Malibu](city) that allow [surfing](filter)
+    - [Restaurants](place_category) in [Laguna Beach](city) with [sunset views](filter)
+    - [Hotels](place_category) in [Santa Cruz](city) that are [beachfront](filter)
+    - [Cafes](place_category) in [Palo Alto](city) with [charging stations](filter)
+    - Find [malls](place_category) in [Glendale](city) that have [movie theaters](filter)
+    - [Restaurants](place_category) in [Huntington Beach](city) with [patio seating](filter)
+    - [Hotels](place_category) in [Newport Beach](city) that have [marina views](filter)
+
+- intent: get_place_details
+  examples: |
+    - Show me details for [The Getty Center](place_name) in [Los Angeles](city)
+    - Information about [Fisherman's Wharf](place_name) in [San Francisco](city)
+    - Tell me about [San Diego Zoo](place_name) in [San Diego](city)
+    - Details for [Disneyland Park](place_name) in [Anaheim](city)
+    - Information on [Universal Studios Hollywood](place_name) in [Los Angeles](city)
+    - Show details for [Golden Gate Bridge](place_name) in [San Francisco](city)
+    - Tell me about [Santa Monica Pier](place_name) in [Santa Monica](city)
+    - Details for [Alcatraz Island](place_name) in [San Francisco](city)
+    - Information about [Balboa Park](place_name) in [San Diego](city)
+    - Show me details for [Hearst Castle](place_name) in [San Simeon](city)
+    - Information on [Yosemite National Park](place_name) in [Yosemite](city)
+    - Details for [Monterey Bay Aquarium](place_name) in [Monterey](city)
+    - Tell me about [LACMA](place_name) in [Los Angeles](city)
+    - Information about [Griffith Observatory](place_name) in [Los Angeles](city)
+    - Show details for [California Science Center](place_name) in [Los Angeles](city)
+    - Details for [Japanese Tea Garden](place_name) in [San Francisco](city)
+    - Information on [San Francisco Museum of Modern Art](place_name) in [San Francisco](city)
+    - Tell me about [The Broad](place_name) in [Los Angeles](city)
+    - Details for [USS Midway Museum](place_name) in [San Diego](city)
+    - Information about [Legoland California](place_name) in [Carlsbad](city)
+    - Show me details for [Sequoia National Park](place_name) in [Three Rivers](city)
+    - Information on [Knotts Berry Farm](place_name) in [Buena Park](city)
+    - Details for [Six Flags Magic Mountain](place_name) in [Valencia](city)
+    - Tell me about [Santa Barbara Mission](place_name) in [Santa Barbara](city)
+    - Information about [Palm Springs Aerial Tramway](place_name) in [Palm Springs](city)
+    - Show details for [Lake Tahoe](place_name) in [Tahoe City](city)
+    - Details for [Catalina Island](place_name) in [Avalon](city)
+    - Information on [Death Valley National Park](place_name) in [Death Valley](city)
+    - Tell me about [Joshua Tree National Park](place_name) in [Joshua Tree](city)
+    - Details for [Redwood National Park](place_name) in [Crescent City](city)
+
+## ==================== EVENTS INTENTS (Eventbrite  API) ====================
+
+- intent: search_events_by_date_range
+  examples: |
+    - Events happening [this weekend](date_range) in [Los Angeles](city)
+    - What's going on [next week](date_range) in [San Francisco](city)?
+    - Find events [this month](date_range) in [San Diego](city)
+    - Events scheduled for [July 2024](specific_date) in [Sacramento](city)
+    - What events are planned for [December holidays](date_range) in [San Jose](city)?
+    - Find activities [during summer](date_range) in [Oakland](city)
+    - Events [next weekend](date_range) in [Santa Barbara](city)
+    - What's happening [in spring](date_range) in [Riverside](city)?
+    - Events planned for [fall season](date_range) in [Fresno](city)
+    - Find events [around Christmas](date_range) in [Long Beach](city)
+    - What's going on [during New Year](date_range) in [Anaheim](city)?
+    - Events [this holiday season](date_range) in [Bakersfield](city)
+    - Find activities [in March](date_range) in [Irvine](city)
+    - Events scheduled for [April 15-20](date_range) in [Modesto](city)
+    - What's happening [next month](date_range) in [Stockton](city)?
+    - Events [over the weekend](date_range) in [Santa Rosa](city)
+    - Find events [in the coming days](date_range) in [Pasadena](city)
+    - What's planned [for Thanksgiving](date_range) in [Palm Springs](city)?
+    - Events [during Memorial Day](date_range) in [Monterey](city)
+    - Find activities [in August](date_range) in [Santa Cruz](city)
+    - Events [around Halloween](date_range) in [Berkeley](city)
+    - What's going on [in September](date_range) in [Palo Alto](city)?
+    - Events [during spring break](date_range) in [Malibu](city)
+    - Find events [in winter](date_range) in [Laguna Beach](city)
+    - What's happening [around Easter](date_range) in [Napa](city)?
+    - Events [during summer vacation](date_range) in [Santa Monica](city)
+    - Find activities [in autumn](date_range) in [Burbank](city)
+    - Events [over the holidays](date_range) in [Glendale](city)
+    - What's planned [for the festival season](date_range) in [Huntington Beach](city)?
+    - Events [during peak season](date_range) in [Newport Beach](city)
+    - find events
+    - what's happening in California?
+    - show me some festivals
+    - any events today?
+
+- intent: search_events_by_price
+  examples: |
+    - [Free events](price_range) in [Los Angeles](city) this weekend
+    - [Paid concerts](price_range) in [San Francisco](city)
+    - [Affordable workshops](price_range) in [San Diego](city)
+    - [Free admission events](price_range) in [Sacramento](city)
+    - [Ticketed shows](price_range) in [San Jose](city)
+    - [No-cost activities](price_range) in [Oakland](city)
+    - [Premium events](price_range) in [Santa Barbara](city)
+    - [Budget-friendly festivals](price_range) in [Riverside](city)
+    - [Free entry concerts](price_range) in [Fresno](city)
+    - [Paid exhibitions](price_range) in [Long Beach](city)
+    - [Complimentary events](price_range) in [Anaheim](city)
+    - [Tickets required events](price_range) in [Bakersfield](city)
+    - [Free of charge activities](price_range) in [Irvine](city)
+    - [Paid admission museums](price_range) in [Modesto](city)
+    - [No ticket needed events](price_range) in [Stockton](city)
+    - [Premium priced concerts](price_range) in [Santa Rosa](city)
+    - [Free access festivals](price_range) in [Pasadena](city)
+    - [Ticketed performances](price_range) in [Palm Springs](city)
+    - [Complimentary workshops](price_range) in [Monterey](city)
+    - [Paid entry shows](price_range) in [Santa Cruz](city)
+    - [Free participation events](price_range) in [Berkeley](city)
+    - [Tickets necessary concerts](price_range) in [Palo Alto](city)
+    - [Free attendance festivals](price_range) in [Malibu](city)
+    - [Paid admission events](price_range) in [Laguna Beach](city)
+    - [No payment required activities](price_range) in [Napa](city)
+    - [Ticketed exhibitions](price_range) in [Santa Monica](city)
+    - [Free entry workshops](price_range) in [Burbank](city)
+    - [Paid shows](price_range) in [Glendale](city)
+    - [Complimentary festivals](price_range) in [Huntington Beach](city)
+    - [Tickets needed concerts](price_range) in [Newport Beach](city)
+
+- intent: search_events_with_capacity
+  examples: |
+    - [Large scale concerts](capacity) in [Los Angeles](city)
+    - [Intimate workshops](capacity) in [San Francisco](city)
+    - [Small gathering events](capacity) in [San Diego](city)
+    - [Massive festivals](capacity) in [Sacramento](city)
+    - [Private events](capacity) in [San Jose](city)
+    - [Crowded concerts](capacity) in [Oakland](city)
+    - [Exclusive workshops](capacity) in [Santa Barbara](city)
+    - [Public events](capacity) in [Riverside](city)
+    - [Limited attendance shows](capacity) in [Fresno](city)
+    - [Open to all festivals](capacity) in [Long Beach](city)
+    - [VIP only events](capacity) in [Anaheim](city)
+    - [General admission concerts](capacity) in [Bakersfield](city)
+    - [Small venue shows](capacity) in [Irvine](city)
+    - [Arena concerts](capacity) in [Modesto](city)
+    - [Private party events](capacity) in [Stockton](city)
+    - [Large audience festivals](capacity) in [Santa Rosa](city)
+    - [Intimate gatherings](capacity) in [Pasadena](city)
+    - [Mass attendance events](capacity) in [Palm Springs](city)
+    - [Small group workshops](capacity) in [Monterey](city)
+    - [Public concerts](capacity) in [Santa Cruz](city)
+    - [Exclusive events](capacity) in [Berkeley](city)
+    - [Large crowd festivals](capacity) in [Palo Alto](city)
+    - [Private exhibitions](capacity) in [Malibu](city)
+    - [Open workshops](capacity) in [Laguna Beach](city)
+    - [Limited capacity shows](capacity) in [Napa](city)
+    - [Massive concerts](capacity) in [Santa Monica](city)
+    - [Small scale events](capacity) in [Burbank](city)
+    - [Large venue festivals](capacity) in [Glendale](city)
+    - [Intimate performances](capacity) in [Huntington Beach](city)
+    - [Public gatherings](capacity) in [Newport Beach](city)
+
+- intent: get_event_ticket_info
+  examples: |
+    - Ticket prices for [Coachella 2024](event_name)
+    - How to get tickets for [Outside Lands](event_name)
+    - Ticket availability for [Stagecoach Festival](event_name)
+    - Where to buy tickets for [LA Film Festival](event_name)
+    - Ticket cost for [San Diego Comic-Con](event_name)
+    - Ticket information for [Bottlerock Napa](event_name)
+    - How much are tickets for [SF Jazz Festival](event_name)?
+    - Ticket purchasing for [Disneyland After Dark](event_name)
+    - Ticket details for [Rose Parade](event_name)
+    - Where can I get tickets for [San Francisco Symphony](event_name)?
+    - Ticket prices for [Hollywood Bowl concerts](event_name)
+    - How to purchase tickets for [Universal Studios Halloween Horror Nights](event_name)
+    - Ticket availability for [Santa Barbara International Film Festival](event_name)
+    - Ticket information for [Monterey Jazz Festival](event_name)
+    - How much for tickets to [LA Pride](event_name)?
+    - Ticket purchasing for [SF Ballet](event_name)
+    - Ticket details for [San Diego County Fair](event_name)
+    - Where to buy tickets for [Palm Springs International Film Festival](event_name)
+    - Ticket prices for [Napa Valley Film Festival](event_name)
+    - How to get tickets for [Sacramento Music Festival](event_name)
+    - Ticket availability for [Berkeley Kite Festival](event_name)
+    - Ticket information for [Santa Monica Pier 360](event_name)
+    - How much are tickets for [Anaheim Packing District events](event_name)?
+    - Ticket purchasing for [Long Beach Grand Prix](event_name)
+    - Ticket details for [San Jose Jazz Festival](event_name)
+    - Where can I get tickets for [Riverside Airshow](event_name)?
+    - Ticket prices for [Fresno Fair](event_name)
+    - How to purchase tickets for [Oakland Art & Soul Festival](event_name)
+    - Ticket availability for [Pasadena Chalk Festival](event_name)
+    - Ticket information for [Malibu Arts Festival](event_name)
+## ==================== COMBINATION SERVICE INTENTS ====================
+- intent: ask_weather_based_activities
+  examples: |
+    - What are good [outdoor activities](activity_type) to do in [San Diego](city) given today's weather?
+    - Suggest [indoor places](place_type) in [Los Angeles](city) since it's raining
+    - Best [beaches](place_type) to visit in [Santa Monica](city) with current weather conditions
+    - [Hiking trails](place_type) suitable for today's weather in [San Francisco](city)
+    - [Outdoor restaurants](place_type) with good weather in [San Diego](city) right now
+    - Indoor alternatives for [beach day](activity_type) in [Malibu](city) due to bad weather
+    - Weather-appropriate [clothing recommendations](recommendation_type) for visiting [Yosemite](city)
+    - Best time of day to visit [Golden Gate Park](landmark) based on weather forecast
+    - [Sunset viewing spots](place_type) with clear skies in [Los Angeles](city)
+    - [Rainy day activities](activity_type) in [San Francisco](city)
+    - [Picnic spots](place_type) with perfect weather in [Santa Barbara](city) today
+    - [Water activities](activity_type) recommended for current temperatures in [San Diego](city)
+    - [Sightseeing tours](activity_type) affected by weather in [San Francisco](city)
+    - [Wine tasting](activity_type) weather conditions in [Napa Valley](city)
+    - [Photography locations](place_type) with ideal lighting conditions in [Los Angeles](city)
+    - [Golf courses](place_type) open with current weather in [Palm Springs](city)
+    - [Beach volleyball](activity_type) conditions at [Venice Beach](landmark)
+    - [Ski resort](place_type) conditions in [Lake Tahoe](city) based on weather
+    - [Camping sites](place_type) with safe weather conditions in [Big Sur](city)
+    - [Boat tours](activity_type) operating with current weather in [Monterey](city)
+    - [Festival attendance](activity_type) recommendations based on weekend forecast
+    - [Outdoor concerts](event_type) likely to be canceled due to weather in [Hollywood](city)
+    - [Walking tours](activity_type) comfortable with current temperature in [San Francisco](city)
+    - [Surfing conditions](activity_type) at [Huntington Beach](city) today
+    - [Fishing trips](activity_type) recommended with current weather in [San Diego](city)
+    - [Hot air balloon rides](activity_type) with ideal weather in [Napa](city)
+    - [Zoo visit](activity_type) recommendations based on weather in [San Diego](city)
+    - [Amusement park](place_type) visit suitability with current weather in [Anaheim](city)
+    - [Historical site](place_type) visits comfortable with today's weather in [Sacramento](city)
+    - [Shopping day](activity_type) recommendations based on weather forecast
+
+- intent: ask_event_weather_impact
+  examples: |
+    - Will [Outside Lands festival](event_name) be affected by weather this weekend?
+    - Is [Coachella](event_name) expecting rain during the event?
+    - Weather forecast for [Bottlerock Napa](event_name) dates
+    - Should I bring umbrella to [San Diego Comic-Con](event_name)?
+    - Temperature during [evening concerts](event_type) at [Hollywood Bowl](landmark)
+    - Weather conditions for [outdoor weddings](event_type) in [Santa Barbara](city) this Saturday
+    - Best indoor backup for [outdoor festival](event_type) in [San Francisco](city) if it rains
+    - Sunset time and weather for [beach party](event_type) in [Malibu](city)
+    - Rainfall probability during [LA Marathon](event_name)
+    - Wind conditions for [kite festival](event_type) in [Berkeley](city)
+    - Heat advisory for [daytime events](event_type) in [Palm Springs](city)
+    - Fog impact on [early morning events](event_type) in [San Francisco](city)
+    - Snow conditions for [winter festival](event_type) in [Lake Tahoe](city)
+    - UV index for [outdoor daytime events](event_type) in [San Diego](city)
+    - Humidity comfort level for [outdoor dining events](event_type) in [New Orleans](city)
+    - Storm warnings affecting [music festival](event_type) in [Indio](city)
+    - Temperature drop for [evening events](event_type) in [San Francisco](city)
+    - Weather cancellation policy for [garden tour](event_type) in [Santa Barbara](city)
+    - Best clothing for [night event](event_type) weather in [Los Angeles](city)
+    - Rain date information for [outdoor theater](event_type) in [San Diego](city)
+    - Weather contingency plan for [food festival](event_type) in [San Francisco](city)
+    - Wind chill factor for [stadium event](event_type) in [Oakland](city)
+    - Sunrise weather for [early bird event](event_type) in [Malibu](city)
+    - Precipitation timeline for [weekend festival](event_type) in [Santa Cruz](city)
+    - Temperature comfort zone for [all-day event](event_type) in [Anaheim](city)
+    - Weather impact on [transportation to event](logistics_type) in [Los Angeles](city)
+    - Microclimate conditions for [coastal event](event_type) in [Monterey](city)
+    - Weather pattern analysis for [multi-day festival](event_type) in [San Francisco](city)
+    - Historical weather data for [annual event](event_type) in [Pasadena](city)
+    - Real-time weather updates for [ongoing event](event_type) in [San Diego](city)
+
+## ==================== PERSONALIZATION INTENTS ====================
+- intent: ask_personalized_recommendations
+  examples: |
+    - I like [Italian food](cuisine_type) and [live jazz](music_type), what do you recommend in [San Francisco](city)?
+    - As a [vegetarian](dietary_preference) visiting [Los Angeles](city), suggest good restaurants
+    - Family-friendly [activities](activity_type) with [young children](age_group) in [San Diego](city)
+    - [Romantic](mood) [date night ideas](activity_type) in [Santa Barbara](city)
+    - [Budget-friendly](budget) [things to do](activity_type) in [San Jose](city)
+    - [Adventurous](mood) [outdoor activities](activity_type) for [experienced hikers](skill_level) in [Yosemite](city)
+    - [Accessible](accessibility) [tourist attractions](place_type) in [San Francisco](city) for [wheelchair users](mobility_needs)
+    - [Pet-friendly](pet_policy) [hotels](place_type) and [parks](place_type) in [San Diego](city)
+    - [Luxury](budget) [shopping](activity_type) and [dining](activity_type) in [Beverly Hills](city)
+    - [Historical](interest) [sites](place_type) and [museums](place_type) in [Sacramento](city)
+    - [Art lover](interest) itinerary for [Los Angeles](city) [museums](place_type)
+    - [Foodie](interest) recommendations for [San Francisco](city) [restaurants](place_type)
+    - [Tech enthusiast](interest) spots to visit in [Silicon Valley](city)
+    - [Nature lover](interest) recommendations for [California](state) [parks](place_type)
+    - [Music fan](interest) venues and events in [Los Angeles](city)
+    - [History buff](interest) sites in [Monterey](city) and [Carmel](city)
+    - [Photography enthusiast](interest) locations in [San Francisco](city)
+    - [Wine connoisseur](interest) experiences in [Napa Valley](city)
+    - [Beach lover](interest) recommendations for [Southern California](region)
+    - [Adventure seeker](interest) activities in [Lake Tahoe](city)
+    - [Relaxation focused](mood) spots in [Palm Springs](city)
+    - [Educational](interest) activities for [teenagers](age_group) in [San Diego](city)
+    - [Cultural immersion](interest) experiences in [Los Angeles](city) neighborhoods
+    - [Local experiences](interest) in [San Francisco](city) away from tourist areas
+    - [Sustainable](preference) and [eco-friendly](preference) businesses in [Santa Barbara](city)
+    - [Quiet](preference) and [peaceful](preference) places in [busy cities](city_type)
+    - [Instagram worthy](preference) locations in [Los Angeles](city)
+    - [Hidden gems](preference) in [San Francisco](city) that tourists don't know
+    - [Seasonal](preference) recommendations for [fall activities](seasonal_activity) in [California](state)
+    - [Time-efficient](preference) itinerary for [short visit](duration) to [Los Angeles](city)
+
+## ==================== TRIP PLANNING INTENTS ====================
+- intent: ask_trip_itinerary
+  examples: |
+    - Create a [3-day itinerary](duration) for [Los Angeles](city) focusing on [art and food](interests)
+    - Plan a [weekend trip](duration) to [San Francisco](city) for [first-time visitors](visitor_type)
+    - [One-day schedule](duration) for [family](group_type) in [San Diego](city)
+    - [Honeymoon itinerary](trip_type) for [5 days](duration) in [Napa Valley](city)
+    - [Business trip](trip_type) suggestions for [2 days](duration) in [San Jose](city)
+    - [Budget itinerary](budget_type) for [college students](group_type) in [Santa Barbara](city)
+    - [Photography-focused](interest) [itinerary](trip_type) for [Los Angeles](city)
+    - [Food tour](trip_type) plan for [weekend](duration) in [San Francisco](city)
+    - [Beach vacation](trip_type) itinerary for [family with kids](group_type) in [Orange County](city)
+    - [Wine tasting tour](trip_type) plan for [Napa](city) and [Sonoma](city)
+    - [Road trip](trip_type) itinerary from [Los Angeles](city) to [San Francisco](city)
+    - [Layover tour](trip_type) for [6 hours](duration) in [San Francisco](city)
+    - [Anniversary trip](trip_type) plan for [couple](group_type) in [Santa Barbara](city)
+    - [Bachelor party](trip_type) itinerary in [Las Vegas](city) with day trip to [LA](city)
+    - [Girls weekend](trip_type) plan in [San Diego](city)
+    - [Solo traveler](traveler_type) itinerary for [Los Angeles](city)
+    - [Senior-friendly](traveler_type) tour plan for [San Francisco](city)
+    - [Disability accessible](accessibility) itinerary for [San Diego](city)
+    - [LGBTQ+ friendly](preference) places and events in [West Hollywood](city)
+    - [Shopping spree](trip_type) itinerary in [Beverly Hills](city)
+    - [Nature retreat](trip_type) plan for [Yosemite](city) area
+    - [Urban exploration](trip_type) itinerary for [downtown LA](location)
+    - [Coastal drive](trip_type) plan along [Pacific Coast Highway](route)
+    - [National parks](trip_type) tour of [California](state)
+    - [Theme park](trip_type) vacation plan for [Anaheim](city)
+    - [Spa getaway](trip_type) itinerary for [Palm Springs](city)
+    - [Golf vacation](trip_type) plan for [Pebble Beach](city)
+    - [Surf trip](trip_type) itinerary for [Southern California](region)
+    - [Music festival](trip_type) weekend plan for [Coachella Valley](city)
+    - [Historical tour](trip_type) of [California missions](attraction_type)
+
+## ==================== COMPARISON INTENTS ====================
+- intent: ask_comparison
+  examples: |
+    - Compare weather between [Los Angeles](city) and [San Diego](city) this weekend
+    - Which is better for [beach vacation](trip_type): [Santa Monica](city) or [Laguna Beach](city)?
+    - Compare [hotel prices](comparison_type) in [San Francisco](city) vs [Oakland](city)
+    - Which [museum](place_type) is more suitable for [kids](age_group): [California Science Center](place_name) or [Natural History Museum](place_name)?
+    - Compare [public transportation options](comparison_type) in [Los Angeles](city) and [San Francisco](city)
+    - Which [hiking trail](place_type) is more [beginner-friendly](difficulty): [Runyon Canyon](place_name) or [Griffith Park](place_name)?
+    - Compare [food scenes](comparison_type) in [San Francisco](city) and [Los Angeles](city)
+    - Which [amusement park](place_type) is better for [teenagers](age_group): [Disneyland](place_name) or [Six Flags](place_name)?
+    - Compare [wine tasting experiences](comparison_type) in [Napa](city) and [Sonoma](city)
+    - Which [beach](place_type) has better [surfing conditions](activity_type): [Malibu](city) or [Huntington Beach](city)?
+    - Compare [nightlife](comparison_type) in [San Diego](city) and [Los Angeles](city)
+    - Which [neighborhood](location_type) is better for [foodies](traveler_type): [North Beach](neighborhood) or [Mission District](neighborhood)?
+    - Compare [shopping experiences](comparison_type) at [Rodeo Drive](place_name) vs [Union Square](place_name)
+    - Which [zoo](place_type) is larger: [San Diego Zoo](place_name) or [LA Zoo](place_name)?
+    - Compare [aquarium experiences](comparison_type) at [Monterey Bay](place_name) and [Aquarium of the Pacific](place_name)
+    - Which [national park](place_type) is more accessible: [Yosemite](place_name) or [Sequoia](place_name)?
+    - Compare [tech company tours](activity_type) in [Silicon Valley](city) vs [Seattle](city)
+    - Which [university campus](place_type) is more scenic: [Stanford](place_name) or [UC Berkeley](place_name)?
+    - Compare [historical sites](comparison_type) in [San Francisco](city) and [Sacramento](city)
+    - Which [observation deck](place_type) has better views: [Griffith Observatory](place_name) or [Coit Tower](place_name)?
+    - Compare [botanical gardens](comparison_type) in [Los Angeles](city) area
+    - Which [concert venue](place_type) has better acoustics: [Hollywood Bowl](place_name) or [Greek Theatre](place_name)?
+    - Compare [family activities](comparison_type) in [San Diego](city) vs [Anaheim](city)
+    - Which [wine region](place_type) is more affordable: [Napa](city) or [Sonoma](city)?
+    - Compare [surf spots](comparison_type) along [California coast](region)
+    - Which [hiking area](place_type) has better [wildflower displays](seasonal_feature): [Antelope Valley](place_name) or [Carrizo Plain](place_name)?
+    - Compare [festival experiences](comparison_type) at [Coachella](event_name) vs [Outside Lands](event_name)
+    - Which [theme park](place_type) has shorter lines: [Disneyland](place_name) or [Universal Studios](place_name)?
+    - Compare [luxury hotel experiences](comparison_type) in [Beverly Hills](city)
+
+## ==================== PRACTICAL INFORMATION INTENTS ====================
+- intent: ask_practical_info
+  examples: |
+    - What time does [Golden Gate Park](landmark) open and close?
+    - Parking options near [Disneyland](landmark)
+    - Public transportation to [Getty Center](landmark) from [downtown LA](location)
+    - Ticket prices and hours for [San Diego Zoo](place_name)
+    - Best time to visit [Alcatraz](landmark) to avoid crowds
+    - Dress code for [fancy restaurants](place_type) in [Beverly Hills](city)
+    - COVID restrictions for [museums](place_type) in [San Francisco](city)
+    - Pet policies at [beaches](place_type) in [Malibu](city)
+    - Photography rules at [Griffith Observatory](landmark)
+    - Accessibility information for [Universal Studios](place_name)
+    - Luggage storage options in [San Francisco](city)
+    - SIM card and mobile service recommendations for [tourists](traveler_type) in [California](state)
+    - Tipping customs in [Los Angeles](city) [restaurants](place_type)
+    - Emergency contact numbers in [San Diego](city)
+    - Drinking water safety in [California](state) [cities](location_type)
+    - Public restroom locations in [downtown areas](location_type)
+    - Tourist tax rates in [California](state) cities
+    - Voltage and plug types in [US hotels](place_type)
+    - Sales tax percentage in [Los Angeles County](location)
+    - Smoking regulations in [public places](location_type) in [California](state)
+    - Alcohol purchase laws in [California](state)
+    - Car rental requirements in [San Francisco](city)
+    - Bike rental stations in [Santa Monica](city)
+    - Ferry schedules to [Alcatraz](landmark)
+    - Cable car fares in [San Francisco](city)
+    - Metro system operating hours in [Los Angeles](city)
+    - Toll roads in [Orange County](location)
+    - Airport transportation options from [LAX](airport)
+    - Hotel check-in/check-out times in [California](state)
+    - Currency exchange locations in [San Francisco](city)
+    - Free wifi hotspots in [public areas](location_type)
+
+## ==================== SEASONAL & SPECIAL EVENTS INTENTS ====================
+- intent: ask_seasonal_activities
+  examples: |
+    - Best [fall foliage](seasonal_activity) viewing spots in [California](state)
+    - [Christmas lights](seasonal_activity) displays in [Los Angeles](city)
+    - [Spring flower](seasonal_activity) viewing in [Carlsbad](city)
+    - [Summer concerts](seasonal_activity) series in [Hollywood Bowl](landmark)
+    - [Winter hiking](seasonal_activity) trails in [Big Bear](city)
+    - [Fourth of July fireworks](holiday_event) in [San Diego](city)
+    - [Halloween events](holiday_event) for [families](group_type) in [Orange County](city)
+    - [Thanksgiving dinners](holiday_event) at [restaurants](place_type) in [San Francisco](city)
+    - [New Year's Eve parties](holiday_event) in [Los Angeles](city)
+    - [Easter egg hunts](holiday_event) in [San Diego](city) parks
+    - [Summer solstice](seasonal_event) celebrations in [Santa Barbara](city)
+    - [Winter whale watching](seasonal_activity) in [Monterey](city)
+    - [Spring training](seasonal_activity) baseball games in [Arizona](state)
+    - [Fall harvest](seasonal_activity) festivals in [Napa Valley](city)
+    - [Summer outdoor movies](seasonal_activity) in [Los Angeles](city) parks
+    - [Winter holiday markets](seasonal_activity) in [San Francisco](city)
+    - [Spring garden tours](seasonal_activity) in [Santa Barbara](city)
+    - [Summer beach bonfires](seasonal_activity) in [Southern California](region)
+    - [Fall pumpkin patches](seasonal_activity) near [Los Angeles](city)
+    - [Winter ice skating](seasonal_activity) rinks in [California](state)
+    - [Spring cherry blossoms](seasonal_activity) viewing in [San Francisco](city)
+    - [Summer food truck festivals](seasonal_activity) in [San Diego](city)
+    - [Fall apple picking](seasonal_activity) near [Oakland](city)
+    - [Winter bird watching](seasonal_activity) in [Sacramento](city)
+    - [Spring wildflower hikes](seasonal_activity) in [Antelope Valley](location)
+    - [Summer outdoor concerts](seasonal_activity) series in [California](state)
+    - [Fall wine harvest events](seasonal_activity) in [Sonoma](city)
+    - [Winter holiday light displays](seasonal_activity) in [Newport Beach](city)
+    - [Spring kite festivals](seasonal_activity) in [Berkeley](city)
+    - [Summer outdoor theater](seasonal_activity) performances in [San Diego](city)
+
+## ==================== EMERGENCY & SAFETY INTENTS ====================
+- intent: ask_emergency_info
+  examples: |
+    - Nearest [hospital](emergency_service) to [Hollywood](location)
+    - [Emergency rooms](emergency_service) in [San Francisco](city) that are open 24/7
+    - [Pharmacies](emergency_service) open late in [San Diego](city)
+    - What to do during [earthquake](emergency_type) in [Los Angeles](city)
+    - [Wildfire evacuation routes](emergency_info) for [Malibu](city)
+    - [Poison control center](emergency_service) number for [California](state)
+    - [Road conditions](emergency_info) for [Highway 1](road) near [Big Sur](location)
+    - [Beach safety](safety_info) warnings for [Santa Cruz](city)
+    - [Mountain rescue](emergency_service) contacts for [Yosemite](city)
+    - [Tourist police](emergency_service) in [San Francisco](city)
+    - [Lost and found](emergency_service) locations in [Los Angeles International Airport](airport)
+    - [Emergency vet services](emergency_service) in [San Diego](city)
+    - [Travel insurance providers](emergency_service) for [California](state) trips
+    - [Natural disaster preparedness](safety_info) for [California](state)
+    - [Tsunami warning system](safety_info) for [coastal areas](location_type)
+    - [Heat wave safety tips](safety_info) for [Palm Springs](city)
+    - [Cold weather preparedness](safety_info) for [mountain areas](location_type)
+    - [Flash flood warnings](safety_info) for [canyon areas](location_type)
+    - [Avalanche risk](safety_info) in [Lake Tahoe](city) area
+    - [Terrorism threat level](safety_info) in [major cities](city_type)
+    - [Pickpocket hotspots](safety_info) in [tourist areas](location_type)
+    - [Scam awareness](safety_info) for [tourists](traveler_type) in [Los Angeles](city)
+    - [Safe neighborhoods](safety_info) for [hotels](place_type) in [San Francisco](city)
+    - [Water safety](safety_info) at [California beaches](place_type)
+    - [Hiking safety](safety_info) tips for [national parks](place_type)
+    - [Public transportation safety](safety_info) in [Los Angeles](city)
+    - [Rental car safety](safety_info) tips for [California](state)
+    - [Food safety](safety_info) at [street vendors](place_type)
+    - [COVID testing locations](emergency_service) in [San Diego](city)
+    - [Travel advisory updates](safety_info) for [California](state)
+
+## ==================== ENTITY SYNONYMS ====================
+# MAIN CALIFORNIA CITIES
+- synonym: Los Angeles
+  examples: |
+    - LA
+    - Los Angeles County
+    - City of Angels
+    - LA County
+    - Greater Los Angeles
+    - LA Metro
+    - Southern California
+
+- synonym: San Francisco
+  examples: |
+    - SF
+    - San Francisco Bay Area
+    - The City
+    - San Fran
+    - Frisco
+    - Bay Area
+    - SF Bay
+
+- synonym: San Diego
+  examples: |
+    - SD
+    - America's Finest City
+    - San Diego County
+    - Southern California Coast
+
+- synonym: Silicon Valley
+  examples: |
+    - San Jose
+    - Santa Clara Valley
+    - Tech Hub
+    - Bay Area Tech
+    - South Bay
+
+# PLACES CATEGORY (Foursquare)
+- synonym: restaurant
+  examples: |
+    - eatery
+    - dining establishment
+    - food venue
+    - bistro
+    - café
+    - diner
+    - food spot
+    - eating place
+    - food joint
+
+- synonym: cafe
+  examples: |
+    - coffee shop
+    - coffee house
+    - espresso bar
+    - coffee bar
+    - café
+    - tea house
+    - coffee spot
+    - coffee lounge
+
+- synonym: hotel
+  examples: |
+    - accommodation
+    - lodging
+    - inn
+    - motel
+    - resort
+    - hostel
+    - guesthouse
+    - bed and breakfast
+    - B&B
+
+- synonym: museum
+  examples: |
+    - gallery
+    - exhibition hall
+    - art museum
+    - history museum
+    - science center
+    - cultural center
+    - exhibition space
+    - art gallery
+
+# PLACE FILTER (Foursquare)
+- synonym: outdoor seating
+  examples: |
+    - patio seating
+    - al fresco dining
+    - outdoor dining
+    - terrace seating
+    - garden seating
+    - sidewalk seating
+    - open-air seating
+
+- synonym: pet friendly
+  examples: |
+    - dogs allowed
+    - pets welcome
+    - animal friendly
+    - dog friendly
+    - pet welcoming
+    - allows pets
+
+- synonym: free wifi
+  examples: |
+    - wireless internet
+    - complimentary wifi
+    - internet access
+    - free internet
+    - wifi available
+    - wireless access
+
+# EVENT PRICE RANGE (Eventbrite)
+- synonym: free
+  examples: |
+    - complimentary
+    - no charge
+    - gratis
+    - free of charge
+    - without cost
+    - no payment required
+    - free admission
+
+- synonym: paid
+  examples: |
+    - ticketed
+    - admission required
+    - paid admission
+    - purchase necessary
+    - requires ticket
+    - paid entry
+    - ticket required
+
+# EVENT CAPACITY
+- synonym: large scale
+  examples: |
+    - massive
+    - huge
+    - big
+    - large capacity
+    - arena size
+    - stadium event
+    - major event
+
+- synonym: intimate
+  examples: |
+    - small
+    - cozy
+    - limited capacity
+    - small venue
+    - private
+    - exclusive
+    - small gathering
+
+# FOOD PREFERENCES
+- synonym: vegetarian
+  examples: |
+    - meat-free
+    - plant-based
+    - veggie
+    - meatless
+    - herbivorous
+
+- synonym: vegan
+  examples: |
+    - plant-based only
+    - dairy-free
+    - egg-free
+    - strict vegetarian
+    - animal product free
+
+# BUDGET 
+- synonym: budget-friendly
+  examples: |
+    - affordable
+    - economical
+    - inexpensive
+    - low-cost
+    - cheap
+    - value for money
+
+- synonym: luxury
+  examples: |
+    - high-end
+    - premium
+    - upscale
+    - deluxe
+    - five-star
+    - lavish
+
+# TRIP MODE
+- synonym: romantic
+  examples: |
+    - couples
+    - love
+    - intimate
+    - candlelight
+    - date night
+
+- synonym: adventurous
+  examples: |
+    - thrilling
+    - exciting
+    - daring
+    - extreme
+    - adrenaline
+
+# AGE GROUPS
+- synonym: young children
+  examples: |
+    - kids
+    - toddlers
+    - little ones
+    - preschoolers
+    - elementary age
+
+- synonym: teenagers
+  examples: |
+    - teens
+    - adolescents
+    - youth
+    - high schoolers
+
+# INTERESTS
+- synonym: historical
+  examples: |
+    - heritage
+    - cultural
+    - traditional
+    - old
+    - antique
+
+- synonym: art
+  examples: |
+    - artistic
+    - creative
+    - visual arts
+    - paintings
+    - sculptures
+
+# EMERGENCY SERVICES
+- synonym: hospital
+  examples: |
+    - medical center
+    - emergency room
+    - clinic
+    - healthcare facility
+    - ER
+
+- synonym: pharmacy
+  examples: |
+    - drugstore
+    - apothecary
+    - chemist
+    - medication store
+
+# EMERGENCY SITUATIONS
+- synonym: earthquake
+  examples: |
+    - seismic event
+    - tremor
+    - quake
+    - ground shaking
+
+- synonym: wildfire
+  examples: |
+    - forest fire
+    - brush fire
+    - grass fire
+    - wildland fire
+
+## ==================== REGEX PATTERNS ====================
+- regex: date_range
+  examples: |
+    - (this|next|coming|upcoming)\s+(weekend|week|month|season|quarter|year)
+    - (today|tomorrow|tonight|this evening)
+    - (in|during)\s+(spring|summer|fall|autumn|winter|holidays|christmas|new year|thanksgiving|halloween)
+    - (over|during|for)\s+(the\s+)?(weekend|holidays|festival season|peak season)
+    - (next|this|coming)\s+(friday|saturday|sunday|monday|tuesday|wednesday|thursday)
+    - (in|during)\s+(january|february|march|april|may|june|july|august|september|october|november|december)
+    - (around|near)\s+(christmas|new year|easter|thanksgiving|halloween|memorial day|labor day)
+
+- regex: specific_date
+  examples: |
+    - \d{1,2}[/-]\d{1,2}[/-]\d{2,4}
+    - (january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2}(st|nd|rd|th)?\s*,\s*\d{4}
+    - \d{1,2}\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+\d{4}
+    - \d{4}-\d{2}-\d{2}
+
+- regex: price_range
+  examples: |
+    - (free|complimentary|no charge|gratis|without cost|no payment required|free admission)
+    - (paid|ticketed|admission required|purchase necessary|requires ticket|paid entry|ticket required)
+    - (affordable|budget-friendly|economical|inexpensive|low-cost|cheap|value for money)
+    - (luxury|high-end|premium|upscale|deluxe|five-star|lavish|expensive)
+
+- regex: duration
+  examples: |
+    - (\d+)\s*(day|days)
+    - (\d+)\s*(hour|hours)
+    - (weekend|week|month|year)
+    - (short|long|brief|extended)\s+(visit|trip|stay|vacation)
+
+- regex: phone_number
+  examples: |
+    - \d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}
+    - \(\d{3}\)\s*\d{3}[-\.\s]??\d{4}
+    - \d{3}[-\.\s]??\d{4}
+
+## ==================== LOOKUP TABLES ====================
+- lookup: city
+  examples: |
+    - Los Angeles
+    - San Francisco
+    - San Diego
+    - San Jose
+    - Sacramento
+    - Oakland
+    - Santa Barbara
+    - Riverside
+    - Fresno
+    - Long Beach
+    - Anaheim
+    - Bakersfield
+    - Irvine
+    - Modesto
+    - Stockton
+    - Santa Rosa
+    - Pasadena
+    - Palm Springs
+    - Monterey
+    - Santa Cruz
+    - Berkeley
+    - Palo Alto
+    - Malibu
+    - Laguna Beach
+    - Napa
+    - Santa Monica
+    - Burbank
+    - Glendale
+    - Huntington Beach
+    - Newport Beach
+    - Beverly Hills
+    - West Hollywood
+    - Venice
+    - Hollywood
+    - Mountain View
+    - Carlsbad
+    - San Mateo
+    - Redwood City
+    - Sunnyvale
+    - Santa Clara
+    - Cupertino
+    - Menlo Park
+    - Sausalito
+    - Tiburon
+    - Carmel-by-the-Sea
+    - Solvang
+    - Temecula
+    - Ojai
+    - Big Bear Lake
+    - Lake Arrowhead
+    - Mammoth Lakes
+    - Yosemite Valley
+    - Death Valley
+    - Joshua Tree
+
+- lookup: activity_type
+  examples: |
+    - outdoor activities
+    - indoor activities
+    - beach activities
+    - hiking
+    - sightseeing
+    - shopping
+    - dining
+    - nightlife
+    - cultural activities
+    - adventure sports
+    - water sports
+    - winter sports
+    - family activities
+    - romantic activities
+    - educational activities
+    - photography
+    - wine tasting
+    - brewery tours
+    - food tours
+    - city tours
+    - nature walks
+    - bird watching
+    - whale watching
+    - surfing
+    - snorkeling
+    - scuba diving
+    - kayaking
+    - paddleboarding
+    - fishing
+    - golfing
+    - tennis
+    - yoga
+    - spa treatments
+    - meditation
+
+- lookup: event_type
+  examples: |
+    - concerts
+    - festivals
+    - conferences
+    - workshops
+    - exhibitions
+    - sports events
+    - theater performances
+    - comedy shows
+    - art shows
+    - food festivals
+    - wine events
+    - charity events
+    - networking events
+    - family events
+    - holiday events
+    - seasonal events
+    - outdoor events
+    - indoor events
+    - free events
+    - paid events
+    - music events
+    - dance performances
+    - film screenings
+    - book signings
+    - lectures
+    - seminars
+    - meetups
+    - parties
+    - galas
+    - auctions
+    - competitions
+    - tournaments
+
+- lookup: cuisine_type
+  examples: |
+    - Italian
+    - Mexican
+    - Chinese
+    - Japanese
+    - Thai
+    - Indian
+    - French
+    - Mediterranean
+    - Greek
+    - Spanish
+    - American
+    - Californian
+    - Fusion
+    - Seafood
+    - Steakhouse
+    - Barbecue
+    - Vegetarian
+    - Vegan
+    - Gluten-free
+    - Kosher
+    - Halal
+    - Farm-to-table
+    - Organic
+    - Street food
+    - Fine dining
+    - Casual dining
+    - Fast food
+    - Buffet
+    - Brunch
+    - Breakfast
+    - Lunch
+    - Dinner
+
+- lookup: landmark
+  examples: |
+    - Golden Gate Bridge
+    - Hollywood Walk of Fame
+    - Disneyland
+    - Universal Studios
+    - San Diego Zoo
+    - Alcatraz Island
+    - Santa Monica Pier
+    - Fisherman's Wharf
+    - Getty Center
+    - Griffith Observatory
+    - Balboa Park
+    - Hearst Castle
+    - Yosemite National Park
+    - Lake Tahoe
+    - Death Valley
+    - Joshua Tree
+    - Sequoia National Park
+    - Redwood National Park
+    - Monterey Bay Aquarium
+    - LACMA
+    - The Broad
+    - California Science Center
+    - San Francisco Museum of Modern Art
+    - USS Midway Museum
+    - Legoland California
+    - Knotts Berry Farm
+    - Six Flags Magic Mountain
+    - Santa Barbara Mission
+    - Palm Springs Aerial Tramway
+    - Catalina Island
+    - Napa Valley Vineyards
+    - Sonoma Wine Country
+    - Carmel-by-the-Sea
+    - Big Sur
+    - Malibu Beaches
+    - Venice Beach Boardwalk
+    - Rodeo Drive
+    - Union Square
+    - Gaslamp Quarter
+    - Old Town San Diego
+    - La Jolla Cove
+    - Coronado Island
+    - Pebble Beach
+    - Silicon Valley Tech Companies
+    - Stanford University
+    - UC Berkeley
+    - Hollywood Sign
+    - Beverly Hills Mansions
+    - Sunset Strip
+    - Third Street Promenade
+    - Pier 39
+    - Coit Tower
+    - Japanese Tea Garden
+    - Conservatory of Flowers
+    - California Academy of Sciences
+    - de Young Museum
+    - Legion of Honor
+    - Walt Disney Concert Hall
+    - Dodger Stadium
+    - Staples Center
+    - Chase Center
+    - Oracle Park
+    - Petco Park
+    - Rose Bowl
+    - Hollywood Bowl
+    - Greek Theatre
+    - Shoreline Amphitheatre
+    - Humphreys Concerts by the Bay
+
+## ==================== BASIC INTENTS ====================
+
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - hey there
+    - hi there
+    - hello there
+    - good morning
+    - good afternoon
+    - good evening
+    - morning
+    - afternoon
+    - evening
+    - yo
+    - sup
+    - howdy
+    - hi hi
+    - hi friend
+    - hey buddy
+    - greetings
+    - hallo
+    - salut
+    - ciao
+    - hola
+    - bonjour
+    - what's up
+    - how's it going
+    - how are you
+    - hiya
+    - hey man
+    - hey dude
+    - hello buddy
+    - greetings friend
+    - top of the morning
+    - hey mate
+    - hey pal
+    - hey there friend
+    - hi buddy
+    - hey everyone
+    - hello all
+    - good day
+    - how's everything
+    - long time no see
+    - hi all
+    - hi everyone
+    - hey friend
+    - morning buddy
+    - hey friend!
+    - hello mate
+    - how's life
+    - hi buddy!
+    - hey hi
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you
+    - see you later
+    - catch you later
+    - talk to you soon
+    - farewell
+    - take care
+    - later
+    - cya
+    - adios
+    - peace
+    - see ya
+    - bye bye
+    - have a nice day
+    - until next time
+    - leaving now
+    - good night
+    - night
+    - all the best
+    - bye for now
+    - catch you soon
+    - see you tomorrow
+    - see you around
+    - until later
+    - bye everyone
+    - see you all
+    - take it easy
+    - till next time
+    - bye buddy
+    - see ya later
+    - goodbye friend
+    - bye pal
+    - talk soon
+    - talk later
+    - later alligator
+    - after a while crocodile
+    - so long
+    - toodles
+    - cheerio
+    - ciao
+    - auf wiedersehen
+    - adieu
+    - shalom
+    - farewell friend
+    - bye mate
+    - see you buddy
+    - see you soon
+
+- intent: affirm
+  examples: |
+    - yes
+    - yep
+    - yeah
+    - sure
+    - absolutely
+    - definitely
+    - of course
+    - ok
+    - okay
+    - right
+    - fine
+    - correct
+    - sure thing
+    - naturally
+    - indeed
+    - that’s right
+    - true
+    - sounds good
+    - agreed
+    - affirmative
+    - totally
+    - fine by me
+    - I agree
+    - yes indeed
+    - certainly
+    - exactly
+    - right on
+    - you bet
+    - I do
+    - indeed yes
+    - correctamundo
+    - positively
+    - absolutely yes
+    - definitely yes
+    - sure yes
+    - yes please
+    - right you are
+    - perfect
+    - ok yes
+    - affirmative yes
+    - okay then
+    - sure thing yes
+    - indeed correct
+    - agreed yes
+    - totally yes
+    - that’s correct
+    - correct yes
+    - yeah sure
+
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - nah
+    - never
+    - I don’t think so
+    - not really
+    - negative
+    - absolutely not
+    - by no means
+    - not at all
+    - no way
+    - never ever
+    - I disagree
+    - out of question
+    - don’t
+    - I reject
+    - not happening
+    - no thanks
+    - nay
+    - wrong
+    - absolutely no
+    - definitely not
+    - never mind
+    - no chance
+    - I don’t
+    - no sir
+    - no ma’am
+    - nope nope
+    - not at present
+    - not for me
+    - I refuse
+    - I decline
+    - negative response
+    - never okay
+    - nothing doing
+    - I deny
+    - nope thanks
+    - not interested
+    - no indeed
+    - I won’t
+    - no way jose
+    - not now
+    - I cannot
+    - I won’t do it
+    - no problem
+    - not really yes
+    - no thank you
+    - negative reply
+    - not a chance
+
+- intent: thank_you
+  examples: |
+    - thanks
+    - thank you
+    - thx
+    - thanks a lot
+    - thank you so much
+    - cheers
+    - much appreciated
+    - thanks for the help
+    - great, thanks
+    - awesome, thank you
+    - that's very helpful
+    - thanks buddy
+    - many thanks
+    - you are the best
+    - perfect, thanks
+    - okay thanks
+    - nice, thank you
+    - thks
+    - cool, thanks
+    - I appreciate it
+    - thanks a million
+    - thanks for everything
+    - you've been very helpful
+    - thanks for your time
+    - thanks again
+    - big thanks
+    - thank you for the info
+    - that's all I needed, thanks
+    - sounds good, thanks
+    - thank you kindly
+    - cheers mate
+    - thanks for the tip
+    - I'm grateful
+    - wonderful, thanks
+    - thanks for clarifying
+    - super, thanks
+    - okay, thank you
+    - thanks for the suggestion
+    - thanks for finding that
+    - you're a lifesaver
+    - massive thanks
+    - thank you for your assistance
+    - truly appreciated
+    - thanks, that's it
+    - thank you for your service
+    - heartfelt thanks
+    - thanks for answering
+    - that helped a lot, thanks
+    - I owe you one
+    - thanks a bunch
+
+- intent: help
+  examples: |
+    - help
+    - help me
+    - what can you do?
+    - I need help
+    - how do I use this?
+    - assistance please
+    - give me some help
+    - show me your features
+    - what are your capabilities?
+    - how can you help me?
+    - list of commands
+    - I'm lost
+    - what am I supposed to do?
+    - give me a hint
+    - can you assist me?
+    - show me what you can do
+    - tell me your functions
+    - help please
+    - I need some guidance
+    - what services do you provide?
+    - can you explain your features?
+    - what's your purpose?
+    - tell me how to use you
+    - I don't know what to ask
+    - provide some help
+    - show help
+    - instructions please
+    - what are my options?
+    - can you guide me?
+    - give me examples of what you do
+    - what can I ask you?
+    - I'm confused
+    - support please
+    - menu of options
+    - explain yourself
+    - who are you and what do you do?
+    - help me with this bot
+    - what's the help menu?
+    - tell me about yourself
+    - how does this work?
+    - guide me through
+    - help menu please
+    - I need some support
+    - what can I do here?
+    - list your skills
+    - help required
+    - how to start?
+    - show me the help section
+    - what are the available commands?
+    - please help me out
+
+- intent: stop_cancel
+  examples: |
+    - stop
+    - cancel
+    - abort
+    - stop it
+    - nevermind
+    - forget it
+    - I want to stop
+    - cancel this
+    - don't do that
+    - stop the process
+    - end this
+    - I changed my mind
+    - quit
+    - exit
+    - stop now
+    - cancel the request
+    - just forget about it
+    - scratch that
+    - I don't want to continue
+    - go back
+    - interrupt
+    - enough
+    - that's enough
+    - shut down
+    - break
+    - cancel everything
+    - I'm done
+    - stop the conversation
+    - please stop
+    - I want to quit
+    - cancel action
+    - discard
+    - delete this
+    - let's stop
+    - I don't need it anymore
+    - cancel it now
+    - stop please
+    - skip this
+    - I want to restart
+    - stop the bot
+    - no more
+    - end conversation
+    - terminate
+    - cancel and go back
+    - I'm leaving
+    - forget about this
+    - stop asking
+    - I've had enough
+    - stop the task
+    - deactivate
+
+- intent: repeat
+  examples: |
+    - repeat
+    - what?
+    - excuse me?
+    - say that again
+    - pardon?
+    - repeat please
+    - I didn't get that
+    - can you say it again?
+    - once more
+    - come again?
+    - repeat the last message
+    - could you repeat that?
+    - I missed that
+    - say again
+    - repeat that for me
+    - what was that?
+    - can you rephrase?
+    - repeat what you said
+    - sorry, what?
+    - I didn't hear you
+    - repeat please
+    - one more time
+    - can you repeat the info?
+    - tell me again
+    - repeat the sentence
+    - I beg your pardon?
+    - repeat the answer
+    - could you say it once more?
+    - I don't understand, repeat please
+    - re-say that
+    - what did you say?
+    - say it one more time
+    - can you repeat the last part?
+    - repeat the results
+    - I'm sorry, say it again
+    - repeat the list
+    - repeat the instructions
+    - what was the last thing?
+    - could you repeat yourself?
+    - sorry, I missed what you said
+    - say it again please
+    - repeat the data
+    - repeat the forecast
+    - repeat the places
+    - can you repeat the options?
+    - please say again
+    - I missed the last part
+    - repeat the whole thing
+    - say that one more time
+    - kindly repeat
+
+- intent: wait
+  examples: |
+    - wait
+    - hold on
+    - wait a minute
+    - one second
+    - hold on a sec
+    - give me a moment
+    - just a second
+    - wait please
+    - give me a minute
+    - wait for me
+    - hang on
+    - just a moment
+    - I need a second
+    - don't go yet
+    - wait a bit
+    - one moment please
+    - let me check
+    - hold on please
+    - give me 5 minutes
+    - I'm thinking
+    - stay there
+    - wait, let me see
+    - I need more time
+    - just wait
+    - can you wait?
+    - wait for a second
+    - let me look it up
+    - hold your horses
+    - wait for it
+    - be right back
+    - give me some time
+    - I'm coming back, wait
+    - wait, I'm checking something
+    - a moment please
+    - hang on a minute
+    - just a sec
+    - wait a moment
+    - stay on the line
+    - let me think for a second
+    - wait, I have to check
+    - one minute please
+    - give me a sec
+    - don't answer yet
+    - I'm busy, wait
+    - pause for a moment
+    - wait for my reply
+    - I'll be back in a second
+    - hang on tight
+    - let me verify, wait
+    - wait till I'm ready
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - are you real?
+    - is this a bot?
+    - is this a human?
+    - are you AI?
+    - do you think?
+    - do you have feelings?
+    - are you smart?
+    - are you automated?
+    - are you intelligent?
+    - can you talk like a human?
+    - are you a machine?
+    - are you artificial?
+    - are you alive?
+    - can you understand me?
+    - are you sentient?
+    - are you just a bot?
+    - can you think?
+    - are you computer?
+    - are you software?
+    
+- intent: inform
+  examples: |
+    - [Los Angeles](city)
+    - [San Francisco](city)
+    - [San Diego](city)
+    - in [Sacramento](city)
+    - [Santa Monica](city)
+    - it's [Hollywood](city)
+    - for [San Jose](city)
+    - [restaurant](place_category)
+    - [park](place_category)
+    - [museum](place_category)
+    - [tomorrow](date_range)
+    - [this weekend](date_range)
+  
+
+         
+          
+
+

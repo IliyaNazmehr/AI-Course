@@ -1,0 +1,423 @@
+version: "2.0"
+
+# =====================================================
+# DOMAIN DEFINITION - California Travel Assistant
+# =====================================================
+# This file defines the complete domain of the assistant.
+#
+# Domain Components:
+# 1. Intents: User intentions the assistant can recognize
+# 2. Entities: Information pieces extracted from user messages
+# 3. Slots: Conversation memory variables that store information
+# 4. Responses: Predefined bot responses (utterances)
+# 5. Actions: Custom code actions and response actions
+#
+# Intent Categories:
+# - Basic Intents: Core conversation interactions
+# - Weather Intents: Weather-related queries (OpenWeather API)
+# - Places Intents: Place search and discovery (Foursquare API)
+# - Events Intents: Event finding and tickets (Eventbrite API)
+# - Combination Intents: Multi-service integrated features
+# - Personalization: User preference-based recommendations
+# - Trip Planning: Itinerary creation and travel planning
+# - Comparison: Comparative analysis between locations
+# - Practical Info: Operational and logistical information
+# - Seasonal Activities: Time-based activity suggestions
+# - Emergency Info: Safety and emergency services
+#
+# Slot Configuration:
+# - type: Data type (text, bool, categorical, float, list, any)
+# - influence_conversation: Whether slot affects dialogue flow
+# - auto_fill: Whether slot can be automatically filled from entities
+# - initial_value: Default value when conversation starts
+#
+# Action Categories:
+# - Basic Responses: Simple text responses
+# - Custom Actions: Python code actions for API calls and logic
+# - Helper Actions: Utility actions for validation, resetting, etc.
+#
+# Important Notes:
+# 1. Intents must match those defined in nlu.yml
+# 2. Entities should be consistently used across intents
+# 3. Slots store conversation state between turns
+# 4. Responses can include variables using {slot_name} syntax
+# 5. Actions are executed in the order listed in stories/rules
+#
+# =====================================================
+
+intents:
+
+  # Basic Intents
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - thank_you
+  - help
+  - stop_cancel
+  - repeat
+  - wait
+  - bot_challenge
+  - inform
+  
+  # Weather Intents
+  - ask_current_weather
+  - ask_temperature_specific
+  - ask_humidity_specific
+  - ask_weather_forecast
+  - ask_weather_alerts
+  
+  # Places Intents
+  - search_places_by_category
+  - search_places_near_location
+  - search_places_with_filters
+  - get_place_details
+  
+  # Events Intents
+  - search_events_by_date_range
+  - search_events_by_price
+  - search_events_with_capacity
+  - get_event_ticket_info
+  
+  # Combination Service Intents
+  - ask_weather_based_activities
+  - ask_event_weather_impact
+  
+  # Personalization Intents
+  - ask_personalized_recommendations
+  
+  # Trip Planning Intents
+  - ask_trip_itinerary
+  
+  # Comparison Intents
+  - ask_comparison
+  
+  # Practical Information Intents
+  - ask_practical_info
+  
+  # Seasonal & Special Events Intents
+  - ask_seasonal_activities
+  
+  # Emergency & Safety Intents
+  - ask_emergency_info
+
+entities:
+
+  # Cities & Places
+  - city
+  - landmark
+  - place_name
+  - state
+  - region
+  - location
+  - location_type
+  - neighborhood
+  - city_type
+  - airport
+  - road
+  
+  # Place Category
+  - place_category
+  - place_type
+  - attraction_type
+  
+  # Filters 
+  - filter
+  - activity_type
+  - cuisine_type
+  - music_type
+  - dietary_preference
+  - accessibility
+  - mobility_needs
+  - pet_policy
+  - budget
+  - budget_type
+  - price_range
+  - difficulty
+  
+  # Events
+  - event_name
+  - event_type
+  - capacity
+  - date_range
+  - specific_date
+  - seasonal_activity
+  - seasonal_feature
+  - holiday_event
+  - seasonal_event
+  
+  # Personalization Information
+  - age_group
+  - mood
+  - skill_level
+  - interest
+  - preference
+  - visitor_type
+  - group_type
+  - traveler_type
+  
+  # Trip planning
+  - trip_type
+  - route
+  - duration
+  
+  # Comparison
+  - comparison_type
+  
+  # Practical Information
+  - recommendation_type
+  - logistics_type
+  
+  # Emergency & Safty
+  - emergency_service
+  - emergency_type
+  - emergency_info
+  - safety_info
+
+slots:
+  city:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+      
+  date_range:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+      
+  place_category:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+      
+  landmark:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+      
+  filter:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+      
+  activity_type:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+      
+  event_type:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+      
+  budget:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+
+  interest:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+
+  trip_type:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+
+  location:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+
+  cuisine:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+
+  event_name:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+
+  price_range:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+
+  # Slot for Saving User Info
+       
+  user_preferences:
+    type: any
+    initial_value: {}
+    
+  last_search_results:
+    type: any
+    initial_value: {}
+    
+  conversation_context:
+    type: text
+    influence_conversation: true
+    initial_value: ""
+      
+
+responses:
+  utter_greet:
+  - text: "Hello! I'm your California travel and information assistant. How can I help you today?"
+    
+  utter_goodbye:
+  - text: "Goodbye! Have a wonderful time in California!"
+  - text: "See you later! Enjoy your trip!"
+  - text: "Farewell! Stay safe and have fun exploring!"
+    
+  utter_thank_you:
+  - text: "You're welcome! Happy to help!"
+  - text: "My pleasure! Let me know if you need anything else."
+  - text: "Glad I could assist you!"
+    
+  utter_help:
+  - text: |
+      I can help you with various California travel and information services:
+      
+      🌤️ **Weather Information:**
+      - Current weather and temperature
+      - Humidity and forecasts
+      - Weather alerts
+      
+      🏙️ **Places & Attractions:**
+      - Find restaurants, hotels, cafes
+      - Search places near landmarks
+      - Get detailed place information
+      
+      🎉 **Events & Activities:**
+      - Find events by date, price, capacity
+      - Get ticket information
+      - Weather-impacted event suggestions
+      
+      🗺️ **Trip Planning:**
+      - Personalized itineraries
+      - Weather-based activity recommendations
+      - Comparison between locations
+      
+      🛡️ **Practical & Safety Info:**
+      - Seasonal activities
+      - Emergency services
+      - Practical travel tips
+      
+      What would you like to know about?
+    
+  utter_ask_city:
+  - text: "Which city in California are you interested in?"
+  - text: "Please tell me which California city you'd like information about."
+  - text: "Which city should I look up for you?"
+    
+  utter_ask_date_range:
+  - text: "For what date or time period?"
+  - text: "When are you planning to go?"
+  - text: "What dates are you interested in?"
+    
+  utter_ask_place_category:
+  - text: "What type of place are you looking for?"
+  - text: "What category of places interests you?"
+  - text: "What kind of place do you need to find?"
+    
+  utter_ask_activity_type:
+  - text: "What type of activity are you interested in?"
+  - text: "What kind of activity are you looking for?"
+    
+  utter_confirm_search:
+  - text: "Looking for {place_category} in {city}... Let me check that for you."
+  - text: "Searching for {place_category} in {city}... Just a moment."
+    
+  utter_weather_info_requested:
+  - text: "Checking weather for {city}... Getting the latest information."
+  - text: "Let me get the weather details for {city}..."
+    
+  utter_event_search_started:
+  - text: "Searching for events in {city}... This might take a moment."
+  - text: "Looking up events in {city}... Let me find the best options for you."
+    
+  utter_default:
+  - text: "I'm not sure I understand. Could you please rephrase that?"
+  - text: "I didn't quite get that. Can you say it differently?"
+  - text: "Sorry, I'm not sure how to help with that. Try asking about weather, places, events, or travel tips in California."
+    
+  utter_ask_clarification:
+  - text: "Could you please clarify what you're looking for?"
+  - text: "I want to make sure I understand correctly. Can you provide more details?"
+  - text: "Just to be sure, could you specify what you need?"
+    
+  utter_no_results:
+  - text: "I couldn't find any results matching your criteria. Would you like to try a different search?"
+  - text: "No results found. Maybe try different parameters or another city?"
+    
+  utter_processing:
+  - text: "Processing your request... Please wait a moment."
+  - text: "Working on it... This might take a few seconds."
+    
+  utter_api_error:
+  - text: "I'm having trouble accessing that information right now. Please try again in a moment."
+  - text: "There seems to be a connection issue. Could you try again?"
+    
+  utter_bot_challenge:
+  - text: "I'm an AI assistant specialized in California travel information. I can help you find weather, places, events, and plan your trip!"
+  - text: "I'm a digital assistant designed to help you with California travel planning. How can I assist you today?"
+
+
+actions:
+  # Basic Responces
+  - utter_greet
+  - utter_goodbye
+  - utter_thank_you
+  - utter_help
+  - utter_ask_city
+  - utter_ask_date_range
+  - utter_ask_place_category
+  - utter_ask_activity_type
+  - utter_confirm_search
+  - utter_weather_info_requested
+  - utter_event_search_started
+  - utter_default
+  - utter_ask_clarification
+  - utter_no_results
+  - utter_processing
+  - utter_api_error
+  - utter_bot_challenge
+
+  
+  # Custom Actions
+  - action_get_weather
+  - action_get_temperature
+  - action_get_humidity
+  - action_get_forecast
+  - action_get_weather_alerts
+  
+  - action_search_places_by_category
+  - action_search_places_near_location
+  - action_search_places_with_filters
+  - action_get_place_details
+  
+  - action_search_events_by_date_range
+  - action_search_events_by_price
+  - action_search_events_with_capacity
+  - action_get_event_ticket_info
+  
+  - action_weather_based_recommendations
+  - action_event_weather_impact
+  
+  - action_personalized_recommendations
+  - action_create_itinerary
+  - action_compare_locations
+  - action_get_practical_info
+  - action_get_seasonal_activities
+  - action_get_emergency_info
+  
+  - action_validate_city
+  - action_extract_additional_info
+  - action_save_user_preferences
+  - action_reset_slots
+  
+  # Helper Actions
+  - action_restart
+
+

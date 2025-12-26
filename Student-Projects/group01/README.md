@@ -5,7 +5,7 @@ Tweetelligence
 
 ## 👤 Team Members
 - 
-- 
+- mohammad matin charkhand
 - Mohammad Yusef Saadatzadeh
 - Hasti Azimi
 - Shayan Eskandari

@@ -1,0 +1,537 @@
+/* ===================================================== */
+/* CALIFORNIA TRAVEL ASSISTANT - STYLESHEET */
+/* ===================================================== */
+/* Main CSS file for the chat interface styling
+   California-inspired design with modern UI components
+   
+   Structure:
+   1. CSS Variables: Color scheme and design tokens
+   2. Base Styles: Global resets and body setup
+   3. Container & Layout: Main chat container and positioning
+   4. Decorative Elements: Stickers (sun, palm tree, sea)
+   5. Chat Components: Header, messages, input area, footer
+   6. Message Styles: User and bot message formatting
+   7. Animations: Fade-in, bounce, and hover effects
+   8. Responsive Design: Mobile adaptations
+   9. API Response Styles: Special formatting for data display
+   
+   Color Palette:
+   - Primary Blue: #1a73e8 (California sky)
+   - Secondary Green: #34a853 (Nature)
+   - Accent Yellow: #fbbc05 (California sun)
+   - Palm Green: #2e7d32 (Palm trees)
+   - Sea Blue: #0288d1 (Pacific Ocean)
+   
+*/
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #34a853;
+    --accent-color: #fbbc05;
+    --bot-color: #5f6368;
+    --user-color: #1a73e8;
+    --background-color: #f8f9fa;
+    --chat-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --text-primary: #202124;
+    --text-secondary: #5f6368;
+    --border-color: #dadce0;
+    --palm-green: #2e7d32;
+    --sun-yellow: #fbc02d;
+    --sea-blue: #0288d1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: var(--text-primary);
+}
+
+/* MAIN CONTAINER - Wraps entire chat interface */
+.container {
+    width: 100%;
+    max-width: 900px;
+    height: 90vh;
+    background-color: var(--chat-bg);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* DECORATIVE STICKERS - California theme visual elements */
+.sticker {
+    position: absolute;
+    z-index: 1;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+#palm-tree {
+    top: 20px;
+    right: 30px;
+    width: 120px;
+    height: 200px;
+    background-color: var(--palm-green);
+    clip-path: polygon(50% 0%, 30% 20%, 20% 40%, 30% 60%, 20% 80%, 30% 100%, 70% 100%, 80% 80%, 70% 60%, 80% 40%, 70% 20%);
+}
+
+#sun {
+    top: 15px;
+    left: 40px;
+    width: 100px;
+    height: 100px;
+    background-color: var(--sun-yellow);
+    border-radius: 50%;
+    box-shadow: 0 0 40px var(--sun-yellow);
+}
+
+#sea {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to top, var(--sea-blue) 0%, transparent 100%);
+}
+
+/* CHAT HEADER - Bot identity and status display */
+.chat-header {
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 20px 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bot-avatar {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--primary-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-text {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.header-text h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.header-text .subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-dot.online {
+    background-color: #34a853;
+    box-shadow: 0 0 8px #34a853;
+}
+
+/* CHAT CONTAINER - Main conversation area */
+.chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 25px;
+    overflow-y: auto;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* MESSAGE STYLES - Formatting for chat messages */
+.message {
+    display: flex;
+    max-width: 85%;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bot-message {
+    align-self: flex-start;
+}
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.bot-message .message-avatar {
+    background-color: var(--bot-color);
+    color: white;
+    margin-right: 12px;
+}
+
+.user-message .message-avatar {
+    background-color: var(--user-color);
+    color: white;
+    margin-left: 12px;
+}
+
+.message-content {
+    background-color: white;
+    border-radius: 18px;
+    padding: 15px;
+    box-shadow: 0 3px 10px var(--shadow-color);
+    max-width: 100%;
+}
+
+.bot-message .message-content {
+    border-top-left-radius: 4px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+}
+
+.user-message .message-content {
+    border-top-right-radius: 4px;
+    background: linear-gradient(135deg, var(--user-color) 0%, #6ab0ff 100%);
+    color: white;
+}
+
+.message-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    word-wrap: break-word;
+}
+
+.user-message .message-text {
+    color: white;
+}
+
+.message-time {
+    font-size: 12px;
+    opacity: 0.7;
+    text-align: right;
+}
+
+.user-message .message-time {
+    text-align: left;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.suggestion-tag {
+    background-color: rgba(26, 115, 232, 0.1);
+    color: var(--primary-color);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.suggestion-tag:hover {
+    background-color: rgba(26, 115, 232, 0.2);
+}
+
+/* TYPING INDICATOR - Shows when bot is "typing" */
+.typing-indicator {
+    display: none;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: white;
+    border-top: 1px solid var(--border-color);
+}
+
+.typing-indicator.active {
+    display: flex;
+}
+
+.typing-dots {
+    display: flex;
+    margin-right: 12px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--bot-color);
+    margin: 0 3px;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+}
+
+.typing-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* MESSAGE INPUT - User input area and quick actions */
+.message-input-container {
+    padding: 20px 25px;
+    background-color: white;
+    border-top: 1px solid var(--border-color);
+}
+
+.input-wrapper {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 15px 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+#message-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+#send-button {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    margin-left: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#send-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
+}
+
+.quick-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.quick-action-btn {
+    background-color: rgba(26, 115, 232, 0.1);
+    color: var(--primary-color);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.quick-action-btn:hover {
+    background-color: rgba(26, 115, 232, 0.2);
+    transform: translateY(-2px);
+}
+
+/* FOOTER - Copyright and branding */
+.chat-footer {
+    padding: 15px;
+    text-align: center;
+    background-color: var(--background-color);
+    color: var(--text-secondary);
+    font-size: 14px;
+    border-top: 1px solid var(--border-color);
+}
+
+.chat-footer i {
+    color: #e91e63;
+    margin: 0 5px;
+}
+
+/* RESPONSIVE DESIGN - Mobile adaptations */
+@media (max-width: 768px) {
+    .container {
+        height: 95vh;
+        border-radius: 16px;
+    }
+    
+    .chat-header {
+        padding: 15px 20px;
+    }
+    
+    .bot-avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+    
+    .header-text h1 {
+        font-size: 20px;
+    }
+    
+    .chat-messages {
+        padding: 15px;
+    }
+    
+    .message {
+        max-width: 95%;
+    }
+    
+    .message-content {
+        padding: 12px;
+    }
+    
+    .message-input-container {
+        padding: 15px;
+    }
+    
+    #palm-tree {
+        width: 80px;
+        height: 150px;
+        right: 15px;
+    }
+    
+    #sun {
+        width: 70px;
+        height: 70px;
+        left: 20px;
+    }
+}
+
+/* API RESPONSE STYLING - Special formatting for data display */
+.api-response {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.weather-icon {
+    font-size: 24px;
+}
+
+.weather-temp {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.place-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.place-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.place-item:last-child {
+    border-bottom: none;
+}
+
+.event-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.event-item:last-child {
+    border-bottom: none;
+}
+
+.event-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+}

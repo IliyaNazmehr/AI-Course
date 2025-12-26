@@ -1,0 +1,6 @@
+numpy>=1.21
+librosa>=0.10
+tensorflow>=2.12
+tensorflow-hub>=0.13
+scikit-learn>=1.2
+joblib>=1.3

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 Movie Recommendation Bot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>🎥 Movie Recommendation Bot</h1>
+        <p class="subtitle">Discover movies similar to your favorites 🍿</p>
+
+        <form method="POST" action="/recommend">
+            <input type="text" name="movie" placeholder="Movie you like (e.g. Inception)" required>
+
+            <select name="genre" required>
+                <option value="">Select Genre</option>
+                <option value="28">Action</option>
+                <option value="35">Comedy</option>
+                <option value="18">Drama</option>
+                <option value="10749">Romance</option>
+                <option value="878">Sci-Fi</option>
+                <option value="27">Horror</option>
+            </select>
+
+            <button type="submit">🎬 Recommend</button>
+        </form>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if movies %}
+        <div class="movies">
+            {% for movie in movies %}
+            <div class="movie-card">
+                {% if movie.poster %}
+                <img src="{{ movie.poster }}" alt="Movie Poster">
+                {% endif %}
+                <h3>{{ movie.title }}</h3>
+                <p>{{ movie.overview }}</p>
+                <span>⭐ {{ movie.rating }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

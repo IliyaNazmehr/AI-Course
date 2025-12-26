@@ -1,0 +1,38 @@
+# =====================================================
+# ENDPOINTS CONFIGURATION - California Travel Assistant
+# =====================================================
+# Endpoint configurations for action server and tracker storage
+#
+# Configuration Sections:
+# 1. Action Endpoint: Connects Rasa to custom Python actions
+# 2. Tracker Store: Persists conversation history in SQLite database
+# 3. External APIs: Documentation of external API integrations
+#
+# Note: External APIs are called directly from actions.py
+# API keys should be configured in the actions.py file
+#
+# =====================================================
+
+# Action Server - Required for custom Python actions
+action_endpoint:
+  url: "http://localhost:5055/webhook"
+  type: "http"
+
+# Tracker Store - SQLite database for conversation history
+tracker_store:
+  type: sql
+  url: "sqlite:///rasa.db"
+  db: "rasa.db"
+
+# External API Documentation (configure in actions.py)
+# Uncomment and configure as needed:
+# external_apis:
+#   openweather:
+#     url: "https://api.openweathermap.org/data/2.5"
+#     timeout: 10
+#   foursquare:
+#     url: "https://api.foursquare.com/v3"
+#     timeout: 15
+#   eventbrite:
+#     url: "https://www.eventbriteapi.com/v3"
+#     timeout: 20

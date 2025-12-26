@@ -19,6 +19,8 @@ A modern, fast, and user-friendly React application that generates engaging, vir
 ## Members
 
 - **Mohammad Amin Kavousi** (40110130117116)
+- **Ahoora Shariat jafari** (40110130117237)
+
 
 ## 📸 Screenshots
 

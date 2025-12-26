@@ -1,0 +1,192 @@
+version: "2.0"
+
+# =====================================================
+# CONVERSATION RULES - California Travel Assistant
+# =====================================================
+# This file contains deterministic conversation rules for the assistant.
+#
+# Rules vs Stories:
+# - Rules: Used for predictable, always-true conversation patterns
+# - Stories: Used for training ML policies on various conversation flows
+#
+# Rule Structure:
+# - rule: Descriptive name of the rule
+#   condition: Optional conditions for rule activation
+#   steps: Sequence of intents, actions, and slot operations
+#
+# Rule Categories:
+# 1. Basic Interactions: Greetings, farewells, acknowledgments
+# 2. Slot Validation: Asking for missing information
+# 3. Direct Feature Access: One-step access to specific functions
+# 4. Error Handling: Managing unclear or incomplete requests
+# 5. Fallback Behavior: Default responses when NLU fails
+#
+# Important Notes:
+# - Rules execute with higher priority than ML policies
+# - Use rules for simple, predictable conversation patterns
+# - Use stories for complex, multi-turn conversations
+# - Rules can have conditions based on slot values
+#
+# =====================================================
+
+rules:
+
+  # ==================== BASIC INTERACTION RULES ====================
+
+  - rule: Greet user
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Say goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Respond to thank you
+    steps:
+      - intent: thank_you
+      - action: utter_thank_you
+
+  - rule: Provide help
+    steps:
+      - intent: help
+      - action: utter_help
+
+  - rule: Handle bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_bot_challenge
+
+  - rule: Confirm affirmative
+    steps:
+      - intent: affirm
+      - action: utter_default
+
+  - rule: Handle denial
+    steps:
+      - intent: deny
+      - action: utter_default
+
+  - rule: Handle stop/cancel request
+    steps:
+      - intent: stop_cancel
+      - action: utter_goodbye
+      - action: action_restart
+
+  - rule: Handle repeat request
+    steps:
+      - intent: repeat
+      - action: utter_ask_clarification
+
+  - rule: Handle wait request
+    steps:
+      - intent: wait
+      - action: utter_processing
+
+  # =========================== WEATHER RULES ===========================
+
+  - rule: Ask city if missing
+    condition:
+      - slot_was_set:
+          - city: null
+    steps:
+      - or:
+          - intent: ask_current_weather
+          - intent: ask_temperature_specific
+          - intent: ask_humidity_specific
+          - intent: ask_weather_forecast
+          - intent: ask_weather_alerts
+      - action: utter_ask_city
+
+  # =========================== PLACE RULES ===========================
+
+  - rule: Ask category if missing
+    condition:
+      - slot_was_set:
+          - place_category: null
+    steps:
+      - or:
+          - intent: search_places_by_category
+          - intent: search_places_near_location
+      - action: utter_ask_place_category
+
+  # =========================== EVENT RULES ===========================
+
+  - rule: Ask date if missing
+    condition:
+      - slot_was_set:
+          - date_range: null
+    steps:
+      - or:
+          - intent: search_events_by_date_range
+          - intent: search_events_by_price
+      - action: utter_ask_date_range
+
+  # ==================== COMBINATION SERVICE RULES ====================
+
+  - rule: Handle weather-based recommendations
+    steps:
+      - intent: ask_weather_based_activities
+      - action: action_weather_based_recommendations
+
+  - rule: Handle event weather impact
+    steps:
+      - intent: ask_event_weather_impact
+      - action: action_event_weather_impact
+
+  # ==================== PERSONALIZATION RULES ====================
+
+  - rule: Handle personalized recommendations
+    steps:
+      - intent: ask_personalized_recommendations
+      - action: action_personalized_recommendations
+
+  # ==================== TRIP PLANNING RULES ====================
+
+  - rule: Handle trip itinerary request
+    steps:
+      - intent: ask_trip_itinerary
+      - action: utter_processing
+      - action: action_create_itinerary
+
+  # ==================== COMPARISON RULES ====================
+
+  - rule: Handle comparison requests
+    steps:
+      - intent: ask_comparison
+      - action: utter_processing
+      - action: action_compare_locations
+
+  # ==================== PRACTICAL INFO RULES ====================
+
+  - rule: Handle practical information requests
+    steps:
+      - intent: ask_practical_info
+      - action: utter_processing
+      - action: action_get_practical_info
+
+  # ==================== SEASONAL ACTIVITIES RULES ====================
+
+  - rule: Handle seasonal activities requests
+    steps:
+      - intent: ask_seasonal_activities
+      - action: utter_processing
+      - action: action_get_seasonal_activities
+
+  # ==================== EMERGENCY INFO RULES ====================
+
+  - rule: Handle emergency information requests
+    steps:
+      - intent: ask_emergency_info
+      - action: utter_processing
+      - action: action_get_emergency_info
+
+  # ==================== FALLBACK RULES ====================
+
+  - rule: Fallback when no intent matched
+    steps:
+      - intent: nlu_fallback
+      - action: utter_default
+
+  

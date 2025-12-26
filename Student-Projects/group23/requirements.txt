@@ -1,0 +1,38 @@
+# ==================== CORE RASA ====================
+rasa==2.8.0
+rasa-sdk==2.8.0
+
+# ==================== API INTEGRATIONS ====================
+requests>=2.25.1
+
+# ==================== DATABASE & STORAGE ====================
+sqlalchemy>=1.4.0
+sqlite3  # Built-in, no need to install
+
+# ==================== UTILITIES ====================
+python-dateutil>=2.8.2
+pytz>=2021.3
+typing-extensions>=3.10.0
+colorama>=0.4.4
+coloredlogs>=15.0.0
+ruamel.yaml>=0.17.0
+
+# ==================== ML/NLP DEPENDENCIES ====================
+numpy>=1.21.0
+scikit-learn>=1.0.0
+tensorflow>=2.6.0,<2.9.0  # Compatible with Python 3.7-3.9
+tensorflow-addons>=0.14.0
+tensorflow-hub>=0.12.0
+tensorflow-text>=2.6.0
+transformers>=4.12.0
+
+# ==================== CHANNEL INTEGRATIONS ====================
+python-socketio>=5.0.0
+python-engineio>=4.0.0
+aiohttp>=3.8.0
+
+# ==================== OPTIONAL (FOR DEVELOPMENT) ====================
+# twilio>=7.0.0         # For  SMS/WhatsApp
+# fbmessenger>=6.0.0    # For  Facebook Messenger
+# pyjwt>=2.3.0          # For authentication
+# cryptography>=36.0.0  # For security

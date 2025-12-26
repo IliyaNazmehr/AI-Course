@@ -1,0 +1,5 @@
+# YOUR Telegram bot token from BotFather
+BOT_TOKEN=1234567890:ABCDEFGHIJKLMNOPQRST-EXAMPLE_TOKEN
+
+# Path inside container to tessdata. Override this only if you mount custom tessdata.
+TESSDATA_PREFIX=/usr/share/tesseract-ocr/5/tessdata
