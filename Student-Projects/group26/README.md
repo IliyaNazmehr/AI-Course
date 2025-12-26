@@ -152,13 +152,11 @@ This project was developed as part of a university coursework/thesis. We would l
 ## Development Support
 
 • **hesam shekarabi**  
-• **[Name]** 
-• **[Name]**
+• **Bahar Pourvosoughi** 
+• **Nava Pourjam**
 
 ## Main Contributor
-• **Mohamad sadegh Refahiyat** – 
-
-Main developer
+• **Mohamad sadegh Refahiyat** – Main developer
 
 
 
