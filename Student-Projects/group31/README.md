@@ -1,5 +1,5 @@
 ## Project by:
-**Shirin Abdolahzade For Dr. Maryam Hajiesmaeili --- Group Number 31 @IAUCTB**
+**Shirin Abdolahzade, AmirSahand Haeri For Dr. Maryam Hajiesmaeili --- Group Number 31 @IAUCTB**
 # University Chatbot Project
 
 This is our university group project: a simple chatbot that answers questions about the university and anything else you need!  We built it using Node.js on the backend and the OpenAI API to generate answers. The frontend is clean, academic-style HTML with a chat interface, and it allows switching between different GPT models (GPT-4O-Mini, GPT-4.1-Mini, and GPT-3.5-Turbo). It’s designed to be easy to run and test, perfect for a small project or demo.
@@ -104,3 +104,4 @@ Server listening at http://localhost:3000
 * `node_modules` required files/modules
 * `HOW_TO_RUN.md` – Simplified Version of the README and its contents
 * `package-lock.json`
+
