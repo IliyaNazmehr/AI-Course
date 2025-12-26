@@ -1,4 +1,164 @@
-﻿# Group 2
+# Group 2
+
+## source code
+the following file contains the main n8n workflow used in this project:
+
+
+{
+  "name": "n8n telegram image",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        1376,
+        240
+      ],
+      "id": "72fe64dc-c874-42d4-88f7-fff2656e1b74",
+      "name": "Telegram Trigger",
+      "webhookId": "a3bceba6-da22-4794-bb44-922f2e9b037b",
+      "credentials": {
+        "telegramApi": {
+          "id": "t9ZuvXhdIxlp5ud9",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data[0].b64_json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1760,
+        240
+      ],
+      "id": "d755aa4a-d790-4846-bf8f-ddae71eb8c3e",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://router.huggingface.co/nebius/v1/images/generations",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.HF_API_KEY}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "response_format",
+              "value": "b64_json"
+            },
+            {
+              "name": "prompt",
+              "value": "=\"{{ $json.message.text }}\""
+            },
+            {
+              "name": "model",
+              "value": "black-forest-labs/flux-dev"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1584,
+        240
+      ],
+      "id": "31b905da-8265-4d5b-9a41-c8a48a244e67",
+      "name": "Create Image"
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "binaryData": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1920,
+        240
+      ],
+      "id": "7e650085-d987-4afa-8ed3-feb3224f5964",
+      "name": "Telegram",
+      "webhookId": "851fda81-1ae1-4350-a288-5823a7f3507b",
+      "credentials": {
+        "telegramApi": {
+          "id": "t9ZuvXhdIxlp5ud9",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Create Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Image": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "449c31cc-e69f-477c-ad32-e8fc055fd361",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "18b1ed7f120aa14586cfdcccaebf39e081615446bc492bc6d7655eb45ce874d5"
+  },
+  "id": "6Y4YuW6UXAfZc66q",
+  "tags": []
+}
+=======
 Telegram AI Image Generator Bot
 
 Implementation using n8n and Hugging Face API
