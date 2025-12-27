@@ -1,88 +1,96 @@
-# config.py
+"""
+config.py
+This module contains all configuration constants, model definitions,
+and system prompts used throughout the bot.
+It acts as a central repository for easy adjustments to the
+bot's behavior.
+"""
 
 # --- GROQ MODELS ---
+# A fallback list of text generation models.
+# The bot attempts to fetch the live list from Groq API first, using this only if that fails.
 AVAILABLE_MODELS = {
     "Llama 3.3 70B": "llama-3.3-70b-versatile",
     "Llama 3.1 8B": "llama-3.1-8b-instant",
+    "Llama 3 70B": "llama3-70b-8192",
+    "Llama 3 8B": "llama3-8b-8192",
     "Mixtral 8x7B": "mixtral-8x7b-32768",
     "Gemma 2 9B": "gemma2-9b-it",
+    "DeepSeek R1 Distill 70B": "deepseek-r1-distill-llama-70b",
+    "Qwen 2.5 32B": "qwen-2.5-32b",
+    "Llama 3.2 90B Vision": "llama-3.2-90b-vision-preview",
 }
-
-# --- SETTINGS OPTIONS ---
-SUPPORTED_LANGUAGES = [
-    "Auto",
-    "English",
-    "Persian",
-    "Spanish",
-    "French",
-    "German",
-    "Chinese",
-    "Russian",
-    "Arabic",
-]
-
+# --- AUDIO MODELS ---
+# Whisper models supported by Groq for transcription.
+AVAILABLE_AUDIO_MODELS = {
+    "Whisper Large V3": "whisper-large-v3",
+    "Whisper Large V3 Turbo": "whisper-large-v3-turbo",
+    "Distil-Whisper English": "distil-whisper-large-v3-en",
+}
+# --- SUMMARIZATION SETTINGS ---
+# Maps display names to internal codes for target languages.
+SUMMARY_LANGUAGES = {
+    "🤖 Auto Detection": "Auto",
+    "🇺🇸 English": "English",
+    "🇮🇷 Persian (Farsi)": "Persian",
+    "🇪🇸 Spanish": "Spanish",
+    "🇫🇷 French": "French",
+    "🇩🇪 German": "German",
+    "🇷🇺 Russian": "Russian",
+    "🇸🇦 Arabic": "Arabic",
+    "🇹🇷 Turkish": "Turkish",
+    "🇨🇳 Chinese": "Chinese",
+}
+# Settings for summary length.
 LENGTH_OPTIONS = {
-    "Short (Bullets)": "very concise, using primarily bullet points",
-    "Medium (Standard)": "a balanced summary, 1-2 paragraphs with key highlights",
-    "Long (Detailed)": "a comprehensive detailed summary covering all aspects",
+    "⚡ Short (Bullets)": "Short",
+    "📝 Medium (Balanced)": "Medium",
+    "📜 Long (Detailed)": "Long",
 }
-
+# --- TONE SETTINGS ---
+#'TONE_OPTIONS': Short keys used for Database storage and Button callbacks (limited by 64 bytes).
 TONE_OPTIONS = {
-    "Professional": "executive, neutral, and formal",
-    "Casual": "friendly, relaxed, and easy to read",
-    "ELI5": "simple, as if explaining to a 5-year-old",
+    "👔 Professional": "Professional",
+    "🎓 Academic": "Academic",
+    "🧸 ELI5 (Simple)": "ELI5",
+    "👋 Friendly": "Friendly",
+    "📰 Journalistic": "Journalistic",
+    "😜 Witty": "Witty",
 }
-
+#'TONE_PROMPTS': Maps the short keys above to detailed instructions for the System Prompt.
+TONE_PROMPTS = {
+    "Professional": "Professional, objective, and executive-style",
+    "Academic": "Academic, analytical, and formal",
+    "ELI5": "Simple, easy-to-understand (Explain Like I'm 5)",
+    "Friendly": "Friendly, conversational, and warm",
+    "Journalistic": "Journalistic, factual, and headline-focused",
+    "Witty": "Witty, humorous, and engaging",
+}
+# Temperature settings for the LLM to control randomness.
 CREATIVITY_LEVELS = {"Precise": 0.1, "Balanced": 0.5, "Creative": 0.8}
+# --- SYSTEM PROMPTS ---
+# The core instruction sent to the LLM.
+# It strictly forbids unsupported HTML tags to prevent Telegram parsing errors.
+SYSTEM_PROMPT = """
+You are an elite AI summarization assistant.
+Your goal is to synthesize the input text into a clear, high-quality summary strictly adhering to the user's configuration.
 
-# --- DEFAULTS ---
-DEFAULT_SETTINGS = {
-    "model": "llama-3.3-70b-versatile",
-    "language": "Auto",
-    "length": "Medium (Standard)",
-    "tone": "Professional",
-    "creativity": "Balanced",
-}
+--- CONFIGURATION ---
+1. **Tone**: Adopt a {tone} tone.
+2. **Length**: The summary must be {length}.
+3. **Language**: {language_instruction}
 
-# --- UI BUTTONS ---
-BTN_SETTINGS = "⚙️ Settings"
-BTN_HELP = "❓ Help"
-BTN_ABOUT = "ℹ️ About"
+--- OUTPUT REQUIREMENTS ---
+- **Format**: HTML compatible with Telegram.
+- **Allowed Tags**: ONLY use <b>, <i>, <u>, <s>, <code>, <pre>.
+- **Forbidden Tags**: Do NOT use <p>, <br>, <h1>, <ul>, <li>, or <div>.
+- **Structure**:
+  - Use double newlines for paragraph breaks.
+  - Use "• " (bullet character) for lists, NOT HTML list tags.
+- **Constraints**:
+  - Do NOT use Markdown (like ** or ##).
+  - Do NOT include conversational filler (e.g., "Here is the summary").
+  - Output ONLY the summary content.
 
-# --- MESSAGES ---
-HELP_TEXT = """
-<b>❓ How to use this bot:</b>
-
-1. <b>Send Text:</b> Paste any article, email, or document text here.
-2. <b>Wait:</b> I will process and summarize it for you.
-3. <b>Settings:</b> Use the menu to change the AI Model, Language, Tone, or Length.
-"""
-
-ABOUT_TEXT = """
-<b>ℹ️ About</b>
-
-This is a smart AI Summarizer Bot powered by <b>Groq</b>.
-It uses advanced LLMs to distill complex information into clear summaries.
-
-<b>Features:</b>
-• Professional Text Summarization
-• Multilingual Support
-• Customizable Tone & Length
-"""
-
-# --- PROMPT ENGINEERING ---
-SYSTEM_PROMPT_TEMPLATE = """
-You are an expert summarizer acting in a {tone} capacity.
-
-**Your Goal:**
-Summarize the user's input text. The summary must be {length_instruction}.
-
-**Formatting Guidelines (CRITICAL):**
-1. You must format the output using **HTML** tags supported by Telegram.
-2. Use <b>text</b> for bolding (e.g., for headers or key points).
-3. Do NOT use Markdown (like **bold** or # header).
-4. Do NOT use HTML tags like <br>, <p>, or <div>. Use newlines for spacing.
-
-**Language:**
-{language_instruction}
+Analyze the text deeply and provide the best possible summary now.
 """

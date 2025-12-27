@@ -1,5 +1,6 @@
 # --- Python General ---
 __pycache__/
+*.pyc
 *.py[cod]
 *$py.class
 
@@ -20,7 +21,6 @@ env/
 .DS_Store
 
 # --- Database ---
-# Ignore the local SQLite database to prevent overwriting user data on deployments
 *.db
 *.sqlite3
 bot_users.db
@@ -29,7 +29,6 @@ bot_users.db
 *.log
 
 # --- Project Specific Temporary Files ---
-# These are generated during audio conversion and file processing
 temp_voice_*.ogg
 temp_voice_*.mp3
 temp_*.ogg
@@ -40,3 +39,8 @@ temp.epub
 
 # --- Mac OS ---
 .DS_Store
+
+full_project_context.txt
+compressor.py
+extractor.py
+

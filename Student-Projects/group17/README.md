@@ -1,96 +1,161 @@
-# Advanced AI Summarizer Bot (Groq)
+# 🚀 Advanced AI Summarizer & Transcriber Bot
 
-An advanced Telegram bot that leverages Groq's high-speed LLM API to summarize text. This bot allows users to customize the summarization style, length, tone, and language, persisting user preferences via a local database.
+![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)
+![License](https://img.shields.io/badge/License-MIT-green)
+![AI Engine](https://img.shields.io/badge/AI-Groq_Cloud-orange)
+![Platform](https://img.shields.io/badge/Platform-Telegram-blue?logo=telegram)
 
-## 🚀 Features
+A high-performance, asynchronous Telegram bot designed to break down language barriers and summarize complex content instantly. Powered by the **Groq Inference API**, this bot leverages state-of-the-art LLMs (Llama 3.3, Mixtral, DeepSeek) and Whisper V3 to provide human-level text analysis and audio transcription.
 
-* **Multi-Model Support:** Switch between powerful models like `Llama 3.3 70B`, `Llama 3.1 8B`, `Mixtral 8x7B`, and `Gemma 2 9B`.
-* **Customizable Summaries:**
-    * **Length:** Short (Bullets), Medium (Standard), Long (Detailed).
-    * **Tone:** Professional, Casual, ELI5 (Explain Like I'm 5).
-    * **Creativity:** Adjust temperature from Precise (0.1) to Creative (0.8).
-* **Multilingual:** Supports Auto-detection, English, Persian, Spanish, French, German, Chinese, Russian, and Arabic.
-* **User Persistence:** Automatically saves user preferences using SQLite so settings are remembered for future interactions.
-* **Interactive UI:** Easy-to-use Inline Keyboard menus for settings and configuration.
+## ✨ Key Features
+
+### 🧠 Intelligent Summarization
+* **Multi-Model Support:** Switch dynamically between top-tier models like **Llama 3.3 70B**, **Mixtral 8x7B**, **Gemma 2**, and **DeepSeek R1**.
+* **Context Aware:** Paste long articles, news, or messages directly into the chat for instant analysis.
+* **Customizable Output:**
+    * **Tone:** Choose from Professional, Academic, ELI5 (Simple), Friendly, Journalistic, or Witty.
+    * **Length:** Select Short (Bullets), Medium, or Long (Detailed) summaries.
+    * **Creativity:** Adjust temperature settings for Precise or Creative results.
+
+### 📄 Universal Document Processing
+* **File Support:** Upload **PDF**, **DOCX**, **EPUB**, or **TXT** files.
+* **Smart Extraction:** Automatically cleans formatting, removes HTML artifacts, and extracts readable text from complex documents.
+
+### 🎙️ Audio Intelligence (Whisper V3)
+* **Voice & Audio:** Forward voice notes or upload audio files (`.mp3`, `.ogg`, `.wav`, `.m4a`, etc.).
+* **Transcription:** Uses **Groq's Whisper V3** (Large/Turbo) for near-perfect speech-to-text conversion before summarizing.
+
+### 🌐 Bilingual & User-Friendly
+* **Dual Interface:** Fully localized for **English 🇺🇸** and **Persian (Farsi) 🇮🇷**.
+* **Auto-Translation:** Can detect input language and force the summary output into English, Persian, Spanish, French, German, Russian, Arabic, Turkish, or Chinese.
+* **Interactive Dashboard:** A robust inline settings menu to configure preferences without typing commands.
+
+---
 
 ## 🛠️ Tech Stack
 
-* **Language:** Python 3.x
-* **Framework:** `python-telegram-bot` (v21.10)
-* **AI Provider:** Groq API
-* **Database:** SQLite3
-* **Environment:** `python-dotenv`
+* **Core:** Python 3.10+
+* **Framework:** `python-telegram-bot` (Async)
+* **AI Engine:** [Groq Cloud API](https://groq.com/)
+* **Database:** SQLite + `aiosqlite` (Asynchronous non-blocking storage)
+* **File Processing:** `pypdf`, `python-docx`, `ebooklib`, `BeautifulSoup4`
 
-## ⚙️ Installation & Setup
+## 📸 Screenshots
 
-1.  **Clone the Repository**
-    ```bash
-    git clone <repository-url>
-    cd <repository-folder>
-    ```
+![](assets/1.png)
 
-2.  **Set up Virtual Environment**
-    ```bash
-    # Windows
-    python -m venv .venv
-    .venv\Scripts\activate
+![](assets/2.png)
 
-    # macOS/Linux
-    python3 -m venv .venv
-    source .venv/bin/activate
-    ```
+![](assets/3.png)
 
-3.  **Install Dependencies**
-    ```bash
-    pip install -r requirements.txt
-    ```
+![](assets/4.png)
 
-4.  **Configuration**
-    Create a `.env` file in the root directory. You can copy the structure from the example below:
-    
-    **File:** `.env`
-    ```ini
-    TELEGRAM_BOT_TOKEN=your_telegram_bot_token_here
-    GROQ_API_KEY=your_groq_api_key_here
-    ```
+![](assets/5.png)
 
-    * Get your **Bot Token** from [@BotFather](https://t.me/BotFather) on Telegram.
-    * Get your **Groq API Key** from the [Groq Console](https://console.groq.com/).
+![](assets/6.png)
 
-## ▶️ Usage
+![](assets/7.png)
 
-1.  **Run the Bot**
-    ```bash
-    python bot.py
-    ```
+![](assets/8.png)
 
-2.  **Interact on Telegram**
-    * Send `/start` to initialize the bot and see the main menu.
-    * Click **⚙️ Settings** to configure your preferred Model, Language, and Tone.
-    * **Send any text** to the bot, and it will generate a summary based on your saved settings.
-    * Use the **🔄 Redo / Regenerate** button to get a new version of the summary.
+![](assets/9.png)
+
+---
+
+## 🚀 Installation & Setup
+
+### Prerequisites
+1.  **Python 3.10** or higher.
+2.  A **Telegram Bot Token** (from [@BotFather](https://t.me/BotFather)).
+3.  A **Groq API Key** (from [Groq Console](https://console.groq.com/)).
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/ai-summarizer-bot.git
+cd ai-summarizer-bot
+```
+
+### 2. Set Up Virtual Environment
+It is recommended to use a virtual environment to manage dependencies.
+
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Linux/Mac
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configuration
+Create a `.env` file in the root directory to store your sensitive API keys.
+
+```bash
+# Create .env file
+touch .env
+```
+
+Open `.env` and add the following:
+```ini
+TELEGRAM_BOT_TOKEN=your_telegram_token_here
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+### 5. Run the Bot
+```bash
+python bot.py
+```
+
+---
 
 ## 📂 Project Structure
 
 ```text
-├── bot.py           # Main entry point and bot logic
-├── config.py        # Configuration, constants, and prompt templates
-├── database.py      # SQLite database handling (user settings)
-├── requirements.txt # Python dependencies
-├── .env             # Environment variables (API Keys)
-├── .gitignore       # Files to ignore (venv, db, logs, etc.)
-└── bot_users.db     # Generated at runtime (stores user data)
-
+.
+├── bot.py                 # Application entry point & lifecycle management
+├── config.py              # Configuration, System Prompts, & Model Constants
+├── database.py            # Async SQLite database wrapper
+├── requirements.txt       # Project dependencies
+├── .env                   # API Keys (Gitignored)
+├── handlers/              # Command and Event Handlers
+│   ├── start.py           # Onboarding & Main Menu
+│   ├── messages.py        # Text summarization & Redo logic
+│   ├── files.py           # Document & Audio processing
+│   └── settings.py        # Interactive Settings Dashboard
+└── utils/
+    ├── i18n.py            # Localization (En/Fa strings)
+    └── text_processing.py # File extraction & HTML sanitization
 ```
+
+---
+
+## ❓ Troubleshooting
+
+| Issue | Possible Cause | Solution |
+| :--- | :--- | :--- |
+| **Bot not responding** | Invalid Token or Script not running | Check `.env` token and ensure `python bot.py` is active. |
+| **"API Error"** | Groq API Key invalid or Quota exceeded | Check your Groq Console for rate limits. |
+| **"File Error"** | Corrupt file or Unsupported extension | Ensure file is PDF, DOCX, EPUB, or standard Audio (MP3/OGG/WAV). |
+| **Audio not transcribing** | File too large | Groq has a file size limit (approx 25MB). Compress audio if necessary. |
+
+---
 
 ## 👥 Authors
 
-1. **Alireza Alem**
-2. **Nadia Karami**
-3. **Melina Malakjan**
-4. **Elahe Bakhtiary**
-5. **Mahmoud Sheibani**
+1.  **Alireza Alem**
+2.  **Nadia Karami**
+3.  **Melina Malakjan**
+4.  **Elahe Bakhtiary**
+5.  **Mahmoud Sheibani**
+
+---
 
 ## 📄 License
 
-This project is open-source and available under the MIT License.
+This project is licensed under the **MIT License**.
