@@ -711,4 +711,7 @@ Inside the action:
 - Limited to California cities only
 - API rate limits may affect response speed
 - Event availability depends on Eventbrite coverage
+---
 
+
+**Group Members:** Asal Rezaee
