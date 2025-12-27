@@ -22,7 +22,7 @@ Users interact with the system via Telegram by sending a text prompt. The bot pr
 This project was developed by a group of five students:
 • Member 1: (ّFateme Parvane Sekam)
 • Member 2: (sara ghavidel)
-• Member 3: (Full Name)
+• Member 3: (Raha Motahari)
 • Member 4: (Full Name)
 • Member 5: (Full Name)
 

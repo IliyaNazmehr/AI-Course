@@ -150,29 +150,9 @@ This project was developed as part of a university coursework/thesis. We would l
 • **Prof. iliya Nazmehr** – Provided feedback and resources  
 
 ## Development Support
-
 • **hesam shekarabi**  
-• **[Name]** 
-• **[Name]**
-
-## Main Contributor
-• **Mohamad sadegh Refahiyat** – 
-
-Main developer
-
-
-
-
-
-
-
-
-
-
-=======
-• **[Name]**  
 • **Bahar Pourvosoughi** 
-• **[Name]**
+• **Nava Pourjam**
 
 ## Main Contributor
 • **Mohamad sadegh Refahiyat** – Main developer
