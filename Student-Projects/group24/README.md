@@ -204,6 +204,10 @@ AI Makes a Guess → Verify Correct/Wrong
 Correct: Show Detailed Analysis | Wrong: Continue with Remaining Questions
 ```
 
+## Demo Video
+
+<video src="https://github.com/user-attachments/assets/f63bd147-35b6-4ad2-b56e-3287c2d80eda" controls></video>
+
 ## Project Structure
 
 ```
