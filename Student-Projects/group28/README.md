@@ -13,7 +13,7 @@ This project is intentionally designed to appear **large-scale, professional, an
 This project is developed collaboratively by a five-member team:
 
 1. **Shahrad-Sterji** – Project Lead / System Architecture
-2. **Team Member 2** – Computer Vision & OpenCV Specialist
+2. **Ehsan Hadi** – Computer Vision & OpenCV Specialist
 3. **Team Member 3** – AI & Face Mesh Analysis
 4. **Team Member 4** – Optimization & Performance Engineering
 5. **Team Member 5** – Documentation & Presentation
