@@ -16,7 +16,7 @@ This project is developed collaboratively by a five-member team:
 2. **Ehsan Hadi** – Computer Vision & OpenCV Specialist
 3. **Ali moazeni 3** – AI & Face Mesh Analysis
 4. **Damoon Nani** – Optimization & Performance Engineering
-5. **Team Member 5** – Documentation & Presentation
+5. **Parmida Bordbar** – Documentation & Presentation
 
 > *(Replace names and roles as needed)*
 
