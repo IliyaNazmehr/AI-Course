@@ -21,13 +21,10 @@
 | Name                    | Academic Role                               | Technical Responsibility                                                                                                                                                                |
 |-------------------------|---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Aylar Kazempour         | Lead System Analyst & Algorithm Architect   | End-to-end problem modeling, design of nutritional algorithms, BMR/TDEE formulation, goal-based calorie optimization logic, and validation of algorithmic correctness (`diet_logic.py`) |
-| user2         | Backend Logic Developer                     | Implementation of metabolic calculations, edge-case handling, and integration of algorithmic logic with system workflow (`diet_logic.py`)                                               |
-
+| Mahshid Shoaibi         | Backend Logic Developer                     | Implementation of metabolic calculations, edge-case handling, and integration of algorithmic logic with system workflow (`diet_logic.py`)                                               |
 | Nastaran Moradi         | Frontend & UI Developer                     | Design and implementation of the interactive Streamlit interface, user input validation, and output visualization (`app.py`)                                                            |
-| user4           | Data Architect                              | Design and normalization of food datasets, calorie annotation, and meal categorization (`foods.py`)                                                                                     |
-| user3         | Frontend & UI Developer                     | Design and implementation of the interactive Streamlit interface, user input validation, and output visualization (`app.py`)                                                            |
 | Mahsa Deylami           | Data Architect                              | Design and normalization of food datasets, calorie annotation, and meal categorization (`foods.py`)                                                                                     |
-| user5  | Project Manager & System Integrator         | Module coordination, utility functions, data persistence, and generation of explanatory textual outputs (`utils.py`, `ai.py`)                                                           |
+| Mohammad Rasool Miraki  | Project Manager & System Integrator         | Module coordination, utility functions, data persistence, and generation of explanatory textual outputs (`utils.py`, `ai.py`)                                                           |
 
 ---
 
