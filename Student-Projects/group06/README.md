@@ -27,7 +27,7 @@
 | user4           | Data Architect                              | Design and normalization of food datasets, calorie annotation, and meal categorization (`foods.py`)                                                                                     |
 | user3         | Frontend & UI Developer                     | Design and implementation of the interactive Streamlit interface, user input validation, and output visualization (`app.py`)                                                            |
 | Mahsa Deylami           | Data Architect                              | Design and normalization of food datasets, calorie annotation, and meal categorization (`foods.py`)                                                                                     |
-| user5  | Project Manager & System Integrator         | Module coordination, utility functions, data persistence, and generation of explanatory textual outputs (`utils.py`, `ai.py`)                                                           |
+| Rasoul Miraki  | Project Manager & System Integrator         | Module coordination, utility functions, data persistence, and generation of explanatory textual outputs (`utils.py`, `ai.py`)                                                           |
 
 ---
 
