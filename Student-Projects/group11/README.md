@@ -192,24 +192,22 @@ npm start
 ![Chat Interface](./assets/1.png)
 
 
-### Backend Communication
+## ⚜️ Screenshots
 
-![Backend Communication](./assets/2.png)
+### Chat Interface
+![Chat Interface](asset/1.png)
 
+### Running Chat Interface
+![Backend Communication](asset/2.png)
 
-### AI-generated Responses
+### AI Responding to Stress
+![AI Responses](asset/3.png)
 
-![AI Responses](./assets/3.png)
+### AI Guidance
+![UI Example](asset/4.png)
 
-
-### More UI Examples
-
-![UI Example](./assets/4.png)
-
-
-### Final Demo
-
-![Final Demo](./assets/5.png)
+### Emotional Reflection
+![Final Demo](asset/5.png)
 
 
 ## Conclusion

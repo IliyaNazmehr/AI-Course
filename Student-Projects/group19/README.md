@@ -1,7 +1,7 @@
 # Emotipal: Advanced AI-Driven Psychometric & Behavioral Analysis Platform
 
 <p align="center">
-  <img src="Emotipal.png" alt="Emotipal Architecture" width="100%" style="border-radius: 10px;">
+  <img src="Emotipal.png" alt="Emotipal Architecture" width="50%" style="border-radius: 10px;">
   <br>
   <i>"Beyond Personality Testing: A Distributed System for Psychological Insight"</i>
 </p>
