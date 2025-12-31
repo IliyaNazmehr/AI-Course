@@ -4,7 +4,7 @@
 ## Text Summarizer (telegram bot)
 
 ### Members
-- Mohammad Armin Shojaee (leader)
+- Mohammad Armin Shojaee(leader)
 - Soroush Haghani
 - Fatemeh Nejati
 - Ehsan MoghadamNia
