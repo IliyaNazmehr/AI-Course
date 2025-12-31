@@ -21,8 +21,12 @@ A desktop application for analyzing and estimating housing prices in Tehran usin
 ## 👥 Team Members
 
 - مهدی پور  
+
 - شمسایی  
 - محمدنژاد قره لر  
+
+- شمساییی 
+- محمدنژاد  
 - ساسانی  
 
 ---
