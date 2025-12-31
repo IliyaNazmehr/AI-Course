@@ -22,7 +22,7 @@ A desktop application for analyzing and estimating housing prices in Tehran usin
 
 - مهدی پور  
 - شمسایی  
-- محمدنژاد  
+- محمدنژاد قره لر  
 - ساسانی  
 
 ---
@@ -107,4 +107,5 @@ This project demonstrates the practical use of data analysis and GUI development
 
 
 Developed by AI Students Lab
+
 
