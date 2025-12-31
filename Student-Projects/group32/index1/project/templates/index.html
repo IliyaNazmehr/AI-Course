@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Buddy</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+</head>
+<body>
+  <!-- بخش معرفی -->
+  <div class="hero-container">
+    <div class="hero-card">
+      <div class="owl-pair">
+        <img src="{{ url_for('static', filename='owl1.png') }}" alt="جغد ۱" class="one-owl" />
+        <img src="{{ url_for('static', filename='owl2.png') }}" alt="جغد ۲" class="two-owl" />
+      </div>
+      <img src="{{ url_for('static', filename='owl.png') }}" alt="جغد" class="owl-image" />
+      <h1 class="bot-name">Book Buddy</h1>
+      <p class="bot-intro">دوست کتاب‌خون شما برای پیدا کردن بهترین کتاب‌ها در هر سبک و سلیقه!</p>
+
+      <div class="button-group">
+        <button class="btn btn-light" onclick="sendQuick('ژانر')">📚 ژانر</button>
+        <button class="btn btn-medium" onclick="sendQuick('نویسنده')">✍️ نویسنده</button>
+        <button class="btn btn-dark" onclick="sendQuick('سال انتشار')">📅 سال انتشار</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="chat-box">
+    <div id="messages"></div>
+    <div id="input-area">
+      <!-- تغییر placeholder -->
+      <input type="text" id="user-input" 
+             placeholder="مثلاً: یه رمان عاشقانه معرفی کن... یا بنویس: یه کتاب دیگه معرفی کن" />
+      <button onclick="sendMessage()">ارسال</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='bot.js') }}"></script>
+</body>
+</html>
