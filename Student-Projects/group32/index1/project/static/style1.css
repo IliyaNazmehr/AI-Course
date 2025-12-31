@@ -1,0 +1,148 @@
+body {
+  font-family: 'Tahoma', sans-serif;
+  background-color: #da8f339d;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+}
+
+.hero-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.hero-card {
+  position: relative;
+  background-color: #004d5a;
+  color: white;
+  text-align: center;
+  padding: 0.5rem 0.5rem;
+  border-radius: 20px;
+  width: 60%;
+  margin-top: 40px;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.owl-image {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.bot-name {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+.bot-intro {
+  font-size: 0.9rem;
+  color: #e0e0e0;
+  margin-bottom: 1.5rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-light {
+  background-color: #f5e6cc;
+  color: #5c3a21;
+}
+
+.btn-medium {
+  background-color: #d2b48c;
+  color: #4b2e1e;
+}
+
+.btn-dark {
+  background-color: #b08968;
+  color: #fffaf2;
+}
+
+#chat-box {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fffaf2;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 1rem;
+  border: 1px solid #d2b48c;
+}
+
+#messages {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fff;
+}
+
+#input-area {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#user-input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  opacity: 0.85;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.owl-pair {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.one-owl {
+  width: 100px;
+  height: auto;
+  right:-20px ;
+}
+
+.two-owl {
+  width: 100px;
+  height: auto;
+  left: -20px;
+}
+
+.one-owl, .two-owl {
+  position: absolute;
+  width: 80px;
+  height: auto;
+  top: -40px; 
+}
