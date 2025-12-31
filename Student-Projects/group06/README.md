@@ -11,18 +11,28 @@
 - **Field of Study:** Computer Science
 - **Course:** Artificial Intelligence
 - **Project Type:** Undergraduate Academic Project
-- **Instructor:** Dr. Maryam Haj Esmaeili
+- **Instructor:** Dr. Maryam Hajiesmaeili
 - **Project Title:** DietBot – Personalized Diet Recommendation System
 
 ---
 
 ## 👥 Project Team & Responsibilities
 
+| Name                  | Academic Role                                 | Technical Responsibility                                                                                                                                                                |
+| --------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Aylar Kazempour   | Lead System Analyst & Algorithm Architect | End-to-end problem modeling, design of nutritional algorithms, BMR/TDEE formulation, goal-based calorie optimization logic, and validation of algorithmic correctness (`diet_logic.py`) |
+| Mahshid Shoaibi       | Backend Logic Developer                       | Implementation of metabolic calculations, edge-case handling, and integration of algorithmic logic with system workflow (`diet_logic.py`)                                               |
+| Nastaran Moradi       | Frontend & UI Developer                       | Design and implementation of the interactive Streamlit interface, user input validation, and output visualization (`app.py`)                                                            |
+| Mahsa Deylami         | Data Architect                                | Design and normalization of food datasets, calorie annotation, and meal categorization (`foods.py`)                                                                                     |
+| Mohammad Rasool Miraki | Project Manager & System Integrator           | Module coordination, utility functions, data persistence, and generation of explanatory textual outputs (`utils.py`, `ai.py`)                                                           |
 | Name                  | Academic Role                                 |   | Technical Responsibility                                                                                                                                                                |
 | --------------------- | --------------------------------------------- | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Aylar Kazempour   | Lead System Analyst & Algorithm Architect |   | End-to-end problem modeling, design of nutritional algorithms, BMR/TDEE formulation, goal-based calorie optimization logic, and validation of algorithmic correctness (`diet_logic.py`) |
 | Mahshid SHoeibi      | Backend Logic Developer                       |   | Implementation of metabolic calculations, edge-case handling, and integration of algorithmic logic with system workflow (`diet_logic.py`)                                               |
+| Mahshid SHoeibi       | Backend Logic Developer                       |   | Implementation of metabolic calculations, edge-case handling, and integration of algorithmic logic with system workflow (`diet_logic.py`)                                               |
 | Nastaran Moradi       | Frontend & UI Developer                       |   | Design and implementation of the interactive Streamlit interface, user input validation, and output visualization (`app.py`)                                                            |
+| Mahshid Shoaibi       | Backend Logic Developer                       |   | Implementation of metabolic calculations, edge-case handling, and integration of algorithmic logic with system workflow (`diet_logic.py`)                                               |
+| Nastaran Moradi     | Frontend & UI Developer                       |   | Design and implementation of the interactive Streamlit interface, user input validation, and output visualization (`app.py`)                                                            |
 | Mahsa Deylami         | Data Architect                                |   | Design and normalization of food datasets, calorie annotation, and meal categorization (`foods.py`)                                                                                     |
 | Mohammad Rasool Miraki | Project Manager & System Integrator           |   | Module coordination, utility functions, data persistence, and generation of explanatory textual outputs (`utils.py`, `ai.py`)                                                           |
 
