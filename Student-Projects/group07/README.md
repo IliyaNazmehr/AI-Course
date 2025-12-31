@@ -7,7 +7,7 @@
 - Mohammad Armin Shojaee (leader)
 - Soroush Haghani
 - Fatemeh Nejati
-- Ehsan MoghadamNia
+- Ehsan Moghadam Nia
 - Alireza KianPishe
 
 ---
