@@ -7,6 +7,9 @@
 
 A high-performance, asynchronous Telegram bot designed to break down language barriers and summarize complex content instantly. Powered by the **Groq Inference API**, this bot leverages state-of-the-art LLMs (Llama 3.3, Mixtral, DeepSeek) and Whisper V3 to provide human-level text analysis and audio transcription.
 
+### ⭐The bot is deployed! Test it [here](https://t.me/SnapSummizerbot)
+
+---
 ## ✨ Key Features
 
 ### 🧠 Intelligent Summarization
